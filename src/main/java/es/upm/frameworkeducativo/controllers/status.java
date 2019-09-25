@@ -16,6 +16,4 @@ public class status {
     public String inicio() {
         return "Environment " + environment;
     }
-
-
 }
