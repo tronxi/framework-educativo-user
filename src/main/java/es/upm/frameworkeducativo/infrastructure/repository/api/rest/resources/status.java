@@ -1,8 +1,8 @@
-package es.upm.frameworkeducativo.controllers;
+package es.upm.frameworkeducativo.infrastructure.repository.api.rest.resources;
 
 
-import es.upm.frameworkeducativo.model.entities.Dato;
-import es.upm.frameworkeducativo.model.persistance.DatoMapper;
+import es.upm.frameworkeducativo.domain.model.Dato;
+import es.upm.frameworkeducativo.infrastructure.repository.repository.DatoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;

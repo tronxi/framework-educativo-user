@@ -1,6 +1,6 @@
-package es.upm.frameworkeducativo.model.persistance;
+package es.upm.frameworkeducativo.infrastructure.repository.repository;
 
-import es.upm.frameworkeducativo.model.entities.Dato;
+import es.upm.frameworkeducativo.domain.model.Dato;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 

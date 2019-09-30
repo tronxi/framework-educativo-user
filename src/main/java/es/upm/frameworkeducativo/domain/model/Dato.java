@@ -1,4 +1,4 @@
-package es.upm.frameworkeducativo.model.entities;
+package es.upm.frameworkeducativo.domain.model;
 
 import lombok.Data;
 
