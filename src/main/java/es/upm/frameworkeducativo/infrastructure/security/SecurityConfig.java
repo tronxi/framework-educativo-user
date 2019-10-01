@@ -1,6 +1,6 @@
 package es.upm.frameworkeducativo.infrastructure.security;
 
-import es.upm.frameworkeducativo.infrastructure.security.jwt.JwtAuthorizationFilter;
+import es.upm.frameworkeducativo.infrastructure.security.filter.JwtAuthorizationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

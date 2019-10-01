@@ -1,4 +1,4 @@
-package es.upm.frameworkeducativo.infrastructure.security.jwt;
+package es.upm.frameworkeducativo.infrastructure.security.service;
 
 
 import java.util.Arrays;

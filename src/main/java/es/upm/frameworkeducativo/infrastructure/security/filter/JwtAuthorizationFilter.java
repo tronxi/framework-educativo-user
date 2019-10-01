@@ -1,6 +1,5 @@
-package es.upm.frameworkeducativo.infrastructure.security.jwt;
+package es.upm.frameworkeducativo.infrastructure.security.filter;
 
-import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
-import es.upm.frameworkeducativo.infrastructure.security.jwt.JwtService;
+import es.upm.frameworkeducativo.infrastructure.security.service.JwtService;
 
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     public static final String AUTHORIZATION = "Authorization";
