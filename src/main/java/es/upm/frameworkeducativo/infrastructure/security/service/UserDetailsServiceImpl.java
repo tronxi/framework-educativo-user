@@ -16,17 +16,26 @@ import java.util.List;
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String user) throws UsernameNotFoundException {
+        List<String> roles = new ArrayList<String>();
         if ("alumno".equals(user)) {
-            return this.userBuilder(user, new BCryptPasswordEncoder().encode("123456"), "STUDENT");
+            roles.clear();
+            roles.add("STUDENT");
+            return this.userBuilder(user, new BCryptPasswordEncoder().encode("123456"),roles);
         } else if ("profesor".equals(user)) {
-            return this.userBuilder(user, new BCryptPasswordEncoder().encode("123456"), "TEACHER");
+            roles.clear();
+            roles.add("TEACHER");
+            return this.userBuilder(user, new BCryptPasswordEncoder().encode("123456"), roles);
         } else if ("admin".equals(user)) {
-            return this.userBuilder(user, new BCryptPasswordEncoder().encode("123456"), "STUDENT", "TEACHER", "ADMIN");
+            roles.clear();
+            roles.add("STUDENT");
+            roles.add("TEACHER");
+            roles.add("ADMIN");
+            return this.userBuilder(user, new BCryptPasswordEncoder().encode("123456"), roles);
         } else {
             throw new UsernameNotFoundException("Usuario no encontrado");
         }
     }
-    private User userBuilder(String username, String password, String... roles) {
+    private User userBuilder(String username, String password, List<String> roles) {
         boolean enabled = true;
         boolean accountNonExpired = true;
         boolean credentialsNonExpired = true;
