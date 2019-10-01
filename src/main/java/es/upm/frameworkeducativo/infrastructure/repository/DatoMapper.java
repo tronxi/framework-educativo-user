@@ -1,4 +1,4 @@
-package es.upm.frameworkeducativo.infrastructure.repository.repository;
+package es.upm.frameworkeducativo.infrastructure.repository;
 
 import es.upm.frameworkeducativo.domain.model.Dato;
 import org.apache.ibatis.annotations.Mapper;

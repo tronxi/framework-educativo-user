@@ -1,0 +1,51 @@
+package es.upm.frameworkeducativo.infrastructure.api.rest.resources;
+
+
+import es.upm.frameworkeducativo.domain.model.Dato;
+import es.upm.frameworkeducativo.infrastructure.repository.DatoMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("status")
+@PreAuthorize("authenticated")
+public class StatusResource {
+    @Value("${environment:entorno por defecto}")
+    private String environment;
+
+    @Autowired
+    DatoMapper datoMapper;
+
+
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public String inicio() {
+        return "Environment " + environment;
+    }
+
+    @PreAuthorize("hasRole('STUDENT')")
+    @RequestMapping(value = "student", method = RequestMethod.GET)
+    public String student() {
+        return "Tienes el rol student";
+    }
+
+    @PreAuthorize("hasRole('TEACHER')")
+    @RequestMapping(value = "teacher", method = RequestMethod.GET)
+    public String teacher() {
+        return "Tienes el rol teacher";
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @RequestMapping(value = "admin", method = RequestMethod.GET)
+    public String admin() {
+        return "Tienes el rol admin";
+    }
+
+    @RequestMapping(value = "/dato", method = RequestMethod.GET)
+    public Dato dato() {
+        return datoMapper.getArticle();
+    }
+}
