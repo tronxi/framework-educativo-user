@@ -41,8 +41,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().httpBasic()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().addFilter(jwtAuthorizationFilter());
-                //.authorizeRequests().anyRequest().authenticated();
+                .and().addFilter(jwtAuthorizationFilter())
+                .headers().frameOptions().disable();
     }
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
