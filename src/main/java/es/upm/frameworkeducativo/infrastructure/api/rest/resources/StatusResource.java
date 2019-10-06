@@ -6,6 +6,7 @@ import es.upm.frameworkeducativo.infrastructure.repository.DatoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,8 +40,9 @@ public class StatusResource {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @RequestMapping(value = "admin", method = RequestMethod.GET)
-    public String admin() {
+    @RequestMapping(value = "admin", method = RequestMethod.POST)
+    public String admin(@RequestBody String users) {
+        System.out.println(users);
         return "Tienes el rol admin";
     }
 
