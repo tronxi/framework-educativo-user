@@ -1,9 +1,9 @@
 package es.upm.frameworkeducativo.infrastructure.security.service;
 
-import es.upm.frameworkeducativo.infrastructure.api.rest.model.UserRoleDAO;
 import es.upm.frameworkeducativo.infrastructure.repository.RoleRepository;
 import es.upm.frameworkeducativo.infrastructure.repository.UserRepository;
 import es.upm.frameworkeducativo.infrastructure.repository.UserRoleRepository;
+import es.upm.frameworkeducativo.infrastructure.repository.model.UserRoleDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

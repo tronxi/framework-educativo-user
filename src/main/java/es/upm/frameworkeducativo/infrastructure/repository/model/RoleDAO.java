@@ -1,4 +1,4 @@
-package es.upm.frameworkeducativo.infrastructure.api.rest.model;
+package es.upm.frameworkeducativo.infrastructure.repository.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Value;

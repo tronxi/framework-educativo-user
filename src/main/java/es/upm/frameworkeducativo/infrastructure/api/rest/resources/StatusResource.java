@@ -1,7 +1,6 @@
 package es.upm.frameworkeducativo.infrastructure.api.rest.resources;
 
 
-import es.upm.frameworkeducativo.domain.model.Dato;
 import es.upm.frameworkeducativo.infrastructure.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

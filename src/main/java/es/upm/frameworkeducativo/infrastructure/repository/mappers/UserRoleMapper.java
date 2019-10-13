@@ -1,6 +1,6 @@
 package es.upm.frameworkeducativo.infrastructure.repository.mappers;
 
-import es.upm.frameworkeducativo.infrastructure.api.rest.model.UserRoleDAO;
+import es.upm.frameworkeducativo.infrastructure.repository.model.UserRoleDAO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 

@@ -1,11 +1,9 @@
 package es.upm.frameworkeducativo.infrastructure.repository;
 
-import es.upm.frameworkeducativo.infrastructure.api.rest.model.RoleDAO;
+import es.upm.frameworkeducativo.infrastructure.repository.model.RoleDAO;
 import es.upm.frameworkeducativo.infrastructure.repository.mappers.RoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class RoleRepository {

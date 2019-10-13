@@ -1,14 +1,19 @@
-package es.upm.frameworkeducativo.infrastructure.api.rest.model;
+package es.upm.frameworkeducativo.domain.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Value;
 
-@AllArgsConstructor
+import java.util.List;
+
 @Value
-public class UserDAO {
+@AllArgsConstructor
+@Builder
+public class User {
     private String id_user;
     private String name;
     private String surnames;
     private String password;
     private String email;
+    private List<String> roles;
 }
