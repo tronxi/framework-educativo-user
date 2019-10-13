@@ -2,7 +2,7 @@ package es.upm.frameworkeducativo.infrastructure.api.rest.resources;
 
 
 import es.upm.frameworkeducativo.domain.model.Dato;
-import es.upm.frameworkeducativo.infrastructure.repository.DatoMapper;
+import es.upm.frameworkeducativo.infrastructure.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,13 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("status")
-@PreAuthorize("authenticated")
+//@PreAuthorize("authenticated")
 public class StatusResource {
+    @Autowired
+    private UserRepository userRepository;
     @Value("${environment:entorno por defecto}")
     private String environment;
-
-    @Autowired
-    DatoMapper datoMapper;
 
 
     @RequestMapping(value = "", method = RequestMethod.GET)
@@ -46,8 +45,10 @@ public class StatusResource {
         return "Tienes el rol admin";
     }
 
-    @RequestMapping(value = "/dato", method = RequestMethod.GET)
-    public Dato dato() {
-        return datoMapper.getArticle();
+    @RequestMapping(value = "test", method = RequestMethod.GET)
+    public String test() {
+        System.out.println(userRepository.getUserByEmail("admi2n@upm"));
+        return "";
     }
+
 }
