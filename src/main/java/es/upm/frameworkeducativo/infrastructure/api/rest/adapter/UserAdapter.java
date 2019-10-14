@@ -2,6 +2,7 @@ package es.upm.frameworkeducativo.infrastructure.api.rest.adapter;
 
 import es.upm.frameworkeducativo.domain.model.User;
 import es.upm.frameworkeducativo.domain.port.primary.LoadUserService;
+import es.upm.frameworkeducativo.infrastructure.api.rest.model.UserDTO;
 import es.upm.frameworkeducativo.infrastructure.repository.RoleRepository;
 import es.upm.frameworkeducativo.infrastructure.repository.UserRepository;
 import es.upm.frameworkeducativo.infrastructure.repository.UserRoleRepository;
@@ -30,19 +31,19 @@ public class UserAdapter {
     @Autowired
     private RoleRepository roleRepository;
 
-    private User userDAOToUser(UserDAO userDAO) {
+    private User userDTOToUser(UserDTO userDTO) {
         return User.builder()
-                .id_user(userDAO.getId_user())
-                .name(userDAO.getName())
-                .surnames(userDAO.getSurnames())
-                .email(userDAO.getEmail())
-                .password(userDAO.getPassword())
-                .roles(userDAO.getRoles())
+                .id_user(userDTO.getId_user())
+                .name(userDTO.getName())
+                .surnames(userDTO.getSurnames())
+                .email(userDTO.getEmail())
+                .password(userDTO.getPassword())
+                .roles(userDTO.getRoles())
                 .build();
     }
 
-    private UserDAO userToUserDAO(User user) {
-        return UserDAO.builder().build();
+    private UserDTO userToUserDTO(User user) {
+        return UserDTO.builder().build();
     }
 
     private List<String> getRolesByUser(String email) {
@@ -54,8 +55,8 @@ public class UserAdapter {
                 .collect(Collectors.toList());
     }
 
-    public ResponseEntity userLoadAdapter(UserDAO userDAO) {
-        User user = userDAOToUser(userDAO);
+    public ResponseEntity userLoadAdapter(UserDTO userDTO) {
+        User user = userDTOToUser(userDTO);
         loadUserService.loadTeacher(user);
         return new ResponseEntity(HttpStatus.CREATED);
     }

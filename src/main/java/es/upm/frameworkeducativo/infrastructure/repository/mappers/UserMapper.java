@@ -4,6 +4,7 @@ import es.upm.frameworkeducativo.infrastructure.repository.model.UserDAO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.exceptions.PersistenceException;
 
 @Mapper
 public interface UserMapper {
@@ -14,6 +15,6 @@ public interface UserMapper {
 
     @Insert("insert into USER (ID_USER, NAME, SURNAMES, PASSWORD, EMAIL) VALUES" +
             "(#{id}, #{name}, #{surnames}, #{password} ,#{email})")
-    UserDAO saveUser(String id, String name, String surnames, String password, String email);
+    void saveUser(String id, String name, String surnames, String password, String email) throws PersistenceException;
 
 }

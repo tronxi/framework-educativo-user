@@ -46,7 +46,7 @@ public class StatusResource {
 
     @RequestMapping(value = "test", method = RequestMethod.GET)
     public String test() {
-        System.out.println(userRepository.getUserByEmail("admi2n@upm"));
+        System.out.println(userRepository.getUserByEmail("admin@upm"));
         return "";
     }
 

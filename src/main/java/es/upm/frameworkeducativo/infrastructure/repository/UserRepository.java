@@ -1,13 +1,16 @@
 package es.upm.frameworkeducativo.infrastructure.repository;
 
+import es.upm.frameworkeducativo.domain.model.User;
+import es.upm.frameworkeducativo.domain.port.secundary.IUserRepository;
 import es.upm.frameworkeducativo.infrastructure.repository.model.UserDAO;
 import es.upm.frameworkeducativo.infrastructure.repository.mappers.UserMapper;
+import org.apache.ibatis.exceptions.PersistenceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class UserRepository {
+public class UserRepository implements IUserRepository {
 
     @Autowired
     private UserMapper userMapper;
@@ -24,8 +27,8 @@ public class UserRepository {
         return this.getUserByEmail(email).getPassword();
     }
 
-    public UserDAO saveUser(UserDAO user) {
-        return userMapper.saveUser(user.getId_user(),
+    public void saveUser(User user) throws PersistenceException {
+        userMapper.saveUser(user.getId_user(),
                 user.getName(), user.getSurnames(),
                 new BCryptPasswordEncoder().encode(user.getPassword()), user.getEmail());
     }

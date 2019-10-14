@@ -1,7 +1,7 @@
 package es.upm.frameworkeducativo.infrastructure.api.rest.resources;
 
 import es.upm.frameworkeducativo.infrastructure.api.rest.adapter.UserAdapter;
-import es.upm.frameworkeducativo.infrastructure.repository.model.UserDAO;
+import es.upm.frameworkeducativo.infrastructure.api.rest.model.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,7 +20,7 @@ public class UserController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping()
-    public ResponseEntity loadTeacher(@RequestBody UserDAO user) {
+    public ResponseEntity loadTeacher(@RequestBody UserDTO user) {
         return userAdapter.userLoadAdapter(user);
     }
 }
