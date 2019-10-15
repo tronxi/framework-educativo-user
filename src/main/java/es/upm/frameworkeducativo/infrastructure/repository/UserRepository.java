@@ -8,6 +8,7 @@ import org.apache.ibatis.exceptions.PersistenceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @Repository
 public class UserRepository implements IUserRepository {
@@ -27,9 +28,14 @@ public class UserRepository implements IUserRepository {
         return this.getUserByEmail(email).getPassword();
     }
 
-    public void saveUser(User user) throws PersistenceException {
-        userMapper.saveUser(user.getId_user(),
-                user.getName(), user.getSurnames(),
-                new BCryptPasswordEncoder().encode(user.getPassword()), user.getEmail());
+    public void saveUser(User user) throws Exception {
+        try {
+            userMapper.saveUser(user.getId_user(),
+                    user.getName(), user.getSurnames(),
+                    new BCryptPasswordEncoder().encode(user.getPassword()), user.getEmail());
+        } catch (PersistenceException e) {
+            throw new Exception("ex");
+        }
+
     }
 }

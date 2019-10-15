@@ -22,15 +22,6 @@ public class UserAdapter {
     @Autowired
     private LoadUserService loadUserService;
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private UserRoleRepository userRoleRepository;
-
-    @Autowired
-    private RoleRepository roleRepository;
-
     private User userDTOToUser(UserDTO userDTO) {
         return User.builder()
                 .id_user(userDTO.getId_user())
@@ -40,19 +31,6 @@ public class UserAdapter {
                 .password(userDTO.getPassword())
                 .roles(userDTO.getRoles())
                 .build();
-    }
-
-    private UserDTO userToUserDTO(User user) {
-        return UserDTO.builder().build();
-    }
-
-    private List<String> getRolesByUser(String email) {
-        String userId = userRepository.getUserIdByEmail(email);
-        List<UserRoleDAO> userRoles = userRoleRepository.getRolesByUserId(userId);
-
-        return userRoles.stream()
-                .map(userRoleDAO -> roleRepository.getRolesById(userRoleDAO.getId_role()).getDescription())
-                .collect(Collectors.toList());
     }
 
     public ResponseEntity userLoadAdapter(UserDTO userDTO) {

@@ -16,8 +16,14 @@ public class RoleRepository implements IRoleRepository {
     @Autowired
     private RoleMapper roleMapper;
 
+    @Override
     public RoleDAO getRolesById(String id_role) {
         return roleMapper.getRoleById(id_role);
+    }
+
+    @Override
+    public String getRoleIdByDescription(String description) {
+        return roleMapper.getRoleByDescription(description);
     }
 
 }
