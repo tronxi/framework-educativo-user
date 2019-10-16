@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("user")
 @PreAuthorize("authenticated")
@@ -20,7 +22,7 @@ public class UserController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping()
-    public ResponseEntity loadTeacher(@RequestBody UserDTO user) {
-        return userAdapter.userLoadAdapter(user);
+    public ResponseEntity loadUsers(@RequestBody List<UserDTO> users) {
+        return userAdapter.userLoadAdapter(users);
     }
 }

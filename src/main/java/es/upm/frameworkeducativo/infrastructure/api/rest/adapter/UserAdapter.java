@@ -33,9 +33,15 @@ public class UserAdapter {
                 .build();
     }
 
-    public ResponseEntity userLoadAdapter(UserDTO userDTO) {
-        User user = userDTOToUser(userDTO);
-        loadUserService.loadTeacher(user);
+    private List<User>  userDTOListTOUserList(List<UserDTO> usersDTO) {
+        return usersDTO.stream()
+                .map(this::userDTOToUser)
+                .collect(Collectors.toList());
+    }
+
+    public ResponseEntity userLoadAdapter(List<UserDTO> usersDTO) {
+        List<User> user = userDTOListTOUserList(usersDTO);
+        loadUserService.loadUsers(user);
         return new ResponseEntity(HttpStatus.CREATED);
     }
 }

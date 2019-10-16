@@ -23,7 +23,13 @@ public class LoadUserServiceImpl implements LoadUserService {
     private IUserRoleRepository userRoleRepository;
 
     @Override
-    public void loadTeacher(User user) {
+    public void loadUsers(List<User> user) {
+        List<Boolean> list = user.stream()
+                .map(this::saveUser)
+                .collect(Collectors.toList());
+    }
+
+    private boolean saveUser(User user) {
         System.out.println(user);
         try {
             userRepository.saveUser(user);
@@ -33,6 +39,7 @@ public class LoadUserServiceImpl implements LoadUserService {
         List<Boolean> list = user.getRoles().stream()
                 .map(role -> setRoles(user.getId_user(), role))
                 .collect(Collectors.toList());
+        return true;
     }
 
     private boolean setRoles(String id_user, String id_role) {
