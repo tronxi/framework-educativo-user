@@ -10,12 +10,13 @@ import org.apache.ibatis.exceptions.PersistenceException;
 @Mapper
 public interface UserMapper {
 
-    @Select("select ID_USER, NAME, SURNAMES, PASSWORD, EMAIL " +
+    @Select("select ID_USER, IDENT, NAME, SURNAMES, PASSWORD, EMAIL, IS_CHANGED " +
             "FROM USER WHERE EMAIL = #{email}")
     UserDAO getUserByEmail(String email);
 
-    @Select("insert into USER (ID_USER, NAME, SURNAMES, PASSWORD, EMAIL) VALUES" +
-            "(#{id}, #{name}, #{surnames}, #{password} ,#{email})")
-    void saveUser(String id, String name, String surnames, String password, String email);
+    @Select("insert into USER (IDENT, NAME, SURNAMES, PASSWORD, EMAIL, IS_CHANGED) VALUES" +
+            "(#{ident}, #{name}, #{surnames}, #{password} ,#{email}, #{isChanged})")
+    void saveUser(String ident, String name,
+                  String surnames, String password, String email, Boolean isChanged);
 
 }

@@ -11,8 +11,10 @@ import java.util.List;
 @Builder
 public class UserDAO {
     private String id_user;
+    private String ident;
     private String name;
     private String surnames;
     private String password;
     private String email;
+    private Boolean isChanged;
 }

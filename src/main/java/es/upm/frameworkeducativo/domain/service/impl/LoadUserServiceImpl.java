@@ -37,7 +37,7 @@ public class LoadUserServiceImpl implements LoadUserService {
             System.out.println("ERROR");
         }
         List<Boolean> list = user.getRoles().stream()
-                .map(role -> setRoles(user.getId_user(), role))
+                .map(role -> setRoles(userRepository.getUserIdByEmail(user.getEmail()), role))
                 .collect(Collectors.toList());
         return true;
     }

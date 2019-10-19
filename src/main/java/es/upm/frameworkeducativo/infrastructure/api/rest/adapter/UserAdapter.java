@@ -25,11 +25,13 @@ public class UserAdapter {
     private User userDTOToUser(UserDTO userDTO) {
         return User.builder()
                 .id_user(userDTO.getId_user())
+                .ident(userDTO.getIdent())
                 .name(userDTO.getName())
                 .surnames(userDTO.getSurnames())
                 .email(userDTO.getEmail())
                 .password(userDTO.getPassword())
                 .roles(userDTO.getRoles())
+                .isChanged(userDTO.getIsChanged())
                 .build();
     }
 

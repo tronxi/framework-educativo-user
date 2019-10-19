@@ -30,9 +30,11 @@ public class UserRepository implements IUserRepository {
 
     public void saveUser(User user) throws Exception {
         try {
-            userMapper.saveUser(user.getId_user(),
+            userMapper.saveUser(
+                    user.getIdent(),
                     user.getName(), user.getSurnames(),
-                    new BCryptPasswordEncoder().encode(user.getPassword()), user.getEmail());
+                    new BCryptPasswordEncoder().encode(user.getPassword()),
+                    user.getEmail(), user.getIsChanged());
         } catch (PersistenceException e) {
             throw new Exception("ex");
         }
