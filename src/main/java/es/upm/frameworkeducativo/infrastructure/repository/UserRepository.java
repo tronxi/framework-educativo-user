@@ -16,8 +16,13 @@ public class UserRepository implements IUserRepository {
     @Autowired
     private UserMapper userMapper;
 
-    public UserDAO getUserByEmail(String email) {
-        return userMapper.getUserByEmail(email);
+    @Override
+    public User getUserByIdent(String ident) {
+        return userDAOToUser(userMapper.getUserByIdent(ident));
+    }
+
+    public User getUserByEmail(String email) {
+        return userDAOToUser(userMapper.getUserByEmail(email));
     }
 
     public String getUserIdByEmail(String email) {
@@ -34,10 +39,35 @@ public class UserRepository implements IUserRepository {
                     user.getIdent(),
                     user.getName(), user.getSurnames(),
                     new BCryptPasswordEncoder().encode(user.getPassword()),
-                    user.getEmail(), user.getIsChanged());
+                    user.getEmail(), false);
         } catch (PersistenceException e) {
             throw new Exception("ex");
         }
 
+    }
+
+    @Override
+    public void updateUser(User user) throws Exception {
+        try {
+            userMapper.updateUser(
+                    user.getIdent(),
+                    user.getName(), user.getSurnames(),
+                    new BCryptPasswordEncoder().encode(user.getPassword()),
+                    user.getEmail(), user.getIsChanged(), user.getId_user());
+        } catch (PersistenceException e) {
+            throw new Exception("ex");
+        }
+    }
+
+    private User userDAOToUser(UserDAO userDAO) {
+        return User.builder()
+                .id_user(userDAO.getId_user())
+                .ident(userDAO.getIdent())
+                .name(userDAO.getName())
+                .surnames(userDAO.getSurnames())
+                .password(userDAO.getPassword())
+                .email(userDAO.getEmail())
+                .isChanged(userDAO.getIsChanged())
+                .build();
     }
 }

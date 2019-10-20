@@ -26,4 +26,9 @@ public class RoleRepository implements IRoleRepository {
         return roleMapper.getRoleByDescription(description);
     }
 
+    @Override
+    public String getDescriptionByRoleId(String id_role) {
+        return roleMapper.getDescriptionByRoleId(id_role);
+    }
+
 }

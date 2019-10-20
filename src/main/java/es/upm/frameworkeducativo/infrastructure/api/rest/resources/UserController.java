@@ -5,10 +5,7 @@ import es.upm.frameworkeducativo.infrastructure.api.rest.model.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,4 +22,11 @@ public class UserController {
     public ResponseEntity loadUsers(@RequestBody List<UserDTO> users) {
         return userAdapter.userLoadAdapter(users);
     }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping()
+    public ResponseEntity<UserDTO> getUsers(@RequestParam String ident) {
+        return userAdapter.getUserByIdentAdapter(ident);
+    }
+
 }

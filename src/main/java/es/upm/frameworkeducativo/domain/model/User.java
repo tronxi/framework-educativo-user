@@ -2,11 +2,11 @@ package es.upm.frameworkeducativo.domain.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Value;
+import lombok.Data;
 
 import java.util.List;
 
-@Value
+@Data
 @AllArgsConstructor
 @Builder
 public class User {

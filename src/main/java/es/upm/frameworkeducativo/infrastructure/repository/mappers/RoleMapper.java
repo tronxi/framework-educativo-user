@@ -12,4 +12,7 @@ public interface RoleMapper {
 
     @Select("select id_role from ROLE where description = #{description}")
     String getRoleByDescription(String description);
+
+    @Select("select description from ROLE where id_role = #{id_role}")
+    String getDescriptionByRoleId(String id_role);
 }
