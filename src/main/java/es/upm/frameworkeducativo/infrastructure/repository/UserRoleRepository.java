@@ -23,4 +23,9 @@ public class UserRoleRepository implements IUserRoleRepository {
     public void setRole(String id_user, String id_role) {
         userRoleMapper.insertUserRole(id_user, id_role);
     }
+
+    @Override
+    public void deleteRoleByUserId(String id_user) {
+        userRoleMapper.deleteUserRoleByUserId(id_user);
+    }
 }

@@ -29,4 +29,7 @@ public interface UserMapper {
                    String surnames, String password, String email, Boolean isChanged,
                    String idUser);
 
+    @Delete("delete from USER where ident = #{ident}")
+    void deleteUserByIdent(String ident);
+
 }

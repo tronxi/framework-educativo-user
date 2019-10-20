@@ -1,6 +1,7 @@
 package es.upm.frameworkeducativo.infrastructure.api.rest.adapter;
 
 import es.upm.frameworkeducativo.domain.model.User;
+import es.upm.frameworkeducativo.domain.port.primary.DeleteUserService;
 import es.upm.frameworkeducativo.domain.port.primary.FindUserService;
 import es.upm.frameworkeducativo.domain.port.primary.LoadUserService;
 import es.upm.frameworkeducativo.domain.port.primary.UpdateUserService;
@@ -22,16 +23,31 @@ public class UserAdapter {
     @Autowired
     private FindUserService findUserService;
 
+    @Autowired
+    private UpdateUserService updateUserService;
+
+    @Autowired
+    private DeleteUserService deleteUserService;
+
     public ResponseEntity userLoadAdapter(List<UserDTO> usersDTO) {
         List<User> user = userDTOListTOUserList(usersDTO);
         loadUserService.loadUsers(user);
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
+    public ResponseEntity updateUserAdapter(UserDTO userDTO) {
+        User user = userDTOToUser(userDTO);
+        return new ResponseEntity(updateUserService.updateUser(user));
+    }
+
     public ResponseEntity<UserDTO> getUserByIdentAdapter(String ident) {
         User user = findUserService.findUserByIdent(ident);
-        UserDTO userDTO =userToUserDTO(user);
+        UserDTO userDTO = userToUserDTO(user);
         return new ResponseEntity<>(userDTO, HttpStatus.OK);
+    }
+
+    public ResponseEntity deleteUserByIdent(String ident) {
+        return new ResponseEntity(deleteUserService.deleteUser(ident));
     }
 
     public ResponseEntity<UserDTO> getUserByEmailAdapter(String email) {

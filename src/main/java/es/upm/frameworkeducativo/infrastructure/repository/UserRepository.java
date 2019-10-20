@@ -59,6 +59,11 @@ public class UserRepository implements IUserRepository {
         }
     }
 
+    @Override
+    public void deleteUserByIdent(String ident) {
+        userMapper.deleteUserByIdent(ident);
+    }
+
     private User userDAOToUser(UserDAO userDAO) {
         return User.builder()
                 .id_user(userDAO.getId_user())

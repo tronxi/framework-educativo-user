@@ -9,4 +9,5 @@ public interface IUserRepository {
     public String getUserPasswordByEmail(String email);
     public void saveUser(User user) throws Exception;
     public void updateUser(User user) throws Exception;
+    public void deleteUserByIdent(String ident);
 }

@@ -29,4 +29,16 @@ public class UserController {
         return userAdapter.getUserByIdentAdapter(ident);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping()
+    public ResponseEntity updateUser(@RequestBody UserDTO userDTO) {
+        return userAdapter.updateUserAdapter(userDTO);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping()
+    public ResponseEntity deleteUser(@RequestParam String ident) {
+        return userAdapter.deleteUserByIdent(ident);
+    }
+
 }
