@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    username: pi
+    password: servidortfg
+  application:
+    name: "user-service"
+server:
+  port: 8081
+comun: application
+environment: defecto

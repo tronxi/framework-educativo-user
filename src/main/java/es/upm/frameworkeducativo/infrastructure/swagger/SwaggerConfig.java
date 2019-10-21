@@ -2,6 +2,7 @@ package es.upm.frameworkeducativo.infrastructure.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
@@ -17,6 +18,12 @@ public class SwaggerConfig {
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("es.upm.frameworkeducativo.infrastructure.api.rest.resources"))
                 .paths(PathSelectors.any())
-                .build();
+                .build()
+                .apiInfo(
+                        new ApiInfoBuilder()
+                                .version("1.0")
+                                .title("User Service API")
+                                .build()
+                );
     }
 }

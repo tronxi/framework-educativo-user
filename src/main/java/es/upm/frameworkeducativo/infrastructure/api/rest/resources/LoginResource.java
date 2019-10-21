@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RestController
+@RestController()
 public class LoginResource {
 
     @Autowired
     private JwtService jwtService;
 
     @PreAuthorize("authenticated")
-    @PostMapping("login")
+    @PostMapping(value = "user/login")
     public String login(@AuthenticationPrincipal User activeUser) {
         List<String> roleList = activeUser.getAuthorities().stream().map
                 (authority -> authority.getAuthority()).collect(Collectors.toList());
