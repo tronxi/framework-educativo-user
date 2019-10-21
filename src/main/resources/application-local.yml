@@ -2,6 +2,9 @@ spring:
   datasource:
     url: jdbc:h2:mem:h2prueba
     driverClassName: org.h2.Driver
+  h2:
+    console:
+        path: /user/h2-console
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
 environment: local
