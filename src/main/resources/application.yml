@@ -3,7 +3,7 @@ spring:
     username: pi
     password: servidortfg
   application:
-    name: "user-service"
+    name: "user"
 server:
   port: 8081
 comun: application
