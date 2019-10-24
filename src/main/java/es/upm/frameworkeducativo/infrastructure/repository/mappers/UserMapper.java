@@ -27,7 +27,7 @@ public interface UserMapper {
             "where ID_USER = #{idUser}")
     void updateUser(String ident, String name,
                    String surnames, String password, String email, Boolean isChanged,
-                   String idUser);
+                   int idUser);
 
     @Delete("delete from USER where ident = #{ident}")
     void deleteUserByIdent(String ident);

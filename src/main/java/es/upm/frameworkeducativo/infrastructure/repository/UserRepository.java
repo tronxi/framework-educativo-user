@@ -53,7 +53,7 @@ public class UserRepository implements IUserRepository {
                     user.getIdent(),
                     user.getName(), user.getSurnames(),
                     new BCryptPasswordEncoder().encode(user.getPassword()),
-                    user.getEmail(), user.getIsChanged(), user.getId_user());
+                    user.getEmail(), user.getIsChanged(), Integer.parseInt(user.getId_user()));
         } catch (PersistenceException e) {
             throw new Exception("ex");
         }
