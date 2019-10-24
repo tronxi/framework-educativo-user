@@ -3,6 +3,7 @@ package es.upm.frameworkeducativo.infrastructure.api.rest.resources;
 import es.upm.frameworkeducativo.infrastructure.api.rest.adapter.UserAdapter;
 import es.upm.frameworkeducativo.infrastructure.api.rest.model.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,7 @@ public class UserController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping()
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDTO> getUsers(@RequestParam String ident) {
         return userAdapter.getUserByIdentAdapter(ident);
     }

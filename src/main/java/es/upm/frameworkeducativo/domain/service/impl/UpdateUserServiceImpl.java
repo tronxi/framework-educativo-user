@@ -41,6 +41,7 @@ public class UpdateUserServiceImpl implements UpdateUserService {
             return HttpStatus.OK;
         } catch (Exception e) {
             System.out.println("error");
+            System.out.println(e.toString());
             return HttpStatus.BAD_REQUEST;
         }
     }
