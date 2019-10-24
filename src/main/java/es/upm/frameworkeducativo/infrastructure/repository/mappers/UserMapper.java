@@ -24,7 +24,7 @@ public interface UserMapper {
 
     @Update("update USER set IDENT = #{ident}, NAME = #{name}, SURNAMES = #{surnames}, " +
             "PASSWORD = #{password}, EMAIL = #{email}, IS_CHANGED = #{isChanged}" +
-            "where ID_USER = #{idUser}")
+            " where ID_USER = #{idUser}")
     void updateUser(String ident, String name,
                    String surnames, String password, String email, Boolean isChanged,
                    int idUser);
