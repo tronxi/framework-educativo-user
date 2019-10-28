@@ -4,6 +4,9 @@ spring:
     password: servidortfg
   application:
     name: "user"
+  cloud:
+    client:
+      hostname: http://raspberrytronxi.ddns.net
 server:
   port: 8081
 comun: application
