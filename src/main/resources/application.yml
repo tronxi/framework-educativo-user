@@ -3,7 +3,7 @@ spring:
     username: pi
     password: servidortfg
   application:
-    name: "user"
+    name: user
   cloud:
     client:
       hostname: http://raspberrytronxi.ddns.net

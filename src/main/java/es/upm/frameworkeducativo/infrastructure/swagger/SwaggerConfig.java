@@ -20,6 +20,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
+                .enableUrlTemplating(true)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("es.upm.frameworkeducativo.infrastructure.api.rest.resources"))
                 .paths(PathSelectors.any())
