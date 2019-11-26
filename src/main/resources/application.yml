@@ -9,10 +9,10 @@ spring:
       hostname: http://raspberrytronxi.ddns.net
 server:
   port: 8081
-  ssl:
-    key-store-type: PKCS12
-    key-store: classpath:framework-certificate.p12
-    key-store-password: changeme
-    key-alias: framework-educativo
+#  ssl:
+#    key-store-type: PKCS12
+#    key-store: classpath:framework-certificate.p12
+#    key-store-password: changeme
+#    key-alias: framework-educativo
 comun: application
 environment: defecto
