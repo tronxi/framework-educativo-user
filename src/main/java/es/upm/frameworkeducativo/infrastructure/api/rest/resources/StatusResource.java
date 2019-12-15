@@ -22,7 +22,7 @@ public class StatusResource {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String inicio() {
-        return "Environment " + environment;
+        return "Entorno " + environment;
     }
 
     @PreAuthorize("hasRole('STUDENT')")
