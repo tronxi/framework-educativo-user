@@ -19,10 +19,12 @@ public class StatusResource {
     @Value("${environment:entorno por defecto}")
     private String environment;
 
+    @Value("${spring.cloud.client.hostname}")
+    private String host;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String inicio() {
-        return "env " + environment;
+        return "env " + host;
     }
 
     @PreAuthorize("hasRole('STUDENT')")
