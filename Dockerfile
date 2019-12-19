@@ -1,4 +1,4 @@
-FROM jimschubert/8-jdk-alpine-mvn
+FROM maven:3.6.3-jdk-8-slim
 
 ARG clave
 ENV clave_env ${clave}
