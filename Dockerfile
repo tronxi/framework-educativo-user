@@ -1,6 +1,6 @@
 ARG clave
 
-FROM maven as builder
+FROM arm32v7/maven as builder
 ARG clave
 ENV clave_env ${clave}
 COPY . .
