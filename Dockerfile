@@ -1,4 +1,4 @@
-FROM maven:3.6.3-jdk-8-slim
+FROM arm32v7/maven:3-jdk-8-alpine
 
 ARG clave
 ENV clave_env ${clave}
