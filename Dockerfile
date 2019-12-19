@@ -1,20 +1,13 @@
-FROM debian:stretch
+FROM jimschubert/8-jdk-alpine-mvn
 
 ARG clave
 ENV clave_env ${clave}
 
 ENV host_env defaultHost
 
-RUN apt update -y && \
-    apt-get update -y && \
-    apt install git -y && \
-    apt install maven -y && \
-    apt-get install openjdk-8-jdk -y
-
 COPY . .
 
-RUN git checkout develop && \
-    mvn package spring-boot:repackage -Dspring.profiles.active=dev -Djasypt.encryptor.password=${clave_env}
+RUN mvn package spring-boot:repackage -Dspring.profiles.active=dev -Djasypt.encryptor.password=${clave_env}
 
 WORKDIR /target
 
