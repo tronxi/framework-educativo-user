@@ -24,7 +24,7 @@ public class StatusResource {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String inicio() {
-        return "hostname" + host;
+        return "hostname " + host;
     }
 
     @PreAuthorize("hasRole('STUDENT')")
