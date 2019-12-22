@@ -14,6 +14,7 @@ RUN mvn package spring-boot:repackage -Dspring.profiles.active=dev -Djasypt.encr
 FROM openjdk:8-alpine
 ARG clave
 ENV clave_env ${clave}
+ENV eureka_host http://localhost
 ENV host_env defaultHost
 COPY --from="builder" /target/framework-educativo-0.0.1-SNAPSHOT.jar .
-CMD java -jar -Dspring.profiles.active=dev -Djasypt.encryptor.password=${clave_env} framework-educativo-0.0.1-SNAPSHOT.jar --spring.cloud.client.hostname=${host_env}
+CMD java -jar -Dspring.profiles.active=dev -Djasypt.encryptor.password=${clave_env} framework-educativo-0.0.1-SNAPSHOT.jar --spring.cloud.client.hostname=${host_env} --eureka-host=${eureka_host}
