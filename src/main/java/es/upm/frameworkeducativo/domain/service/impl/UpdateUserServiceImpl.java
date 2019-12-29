@@ -25,24 +25,22 @@ public class UpdateUserServiceImpl implements UpdateUserService {
     private IRoleRepository roleRepository;
 
     @Override
-    public HttpStatus updateUser(User user) {
+    public void updateUser(User user) throws Exception{
         System.out.println(user);
         deleteRoles(user.getId_user());
-        HttpStatus status = updateUserData(user);
+        updateUserData(user);
         List<Boolean> list = user.getRoles().stream()
                 .map(role -> setRoles(user.getId_user(), role))
                 .collect(Collectors.toList());
-        return status;
     }
 
-    private HttpStatus updateUserData(User user) {
+    private void updateUserData(User user) throws Exception {
         try {
             userRepository.updateUser(user);
-            return HttpStatus.OK;
         } catch (Exception e) {
             System.out.println("error");
             System.out.println(e.toString());
-            return HttpStatus.BAD_REQUEST;
+            throw new Exception();
         }
     }
 

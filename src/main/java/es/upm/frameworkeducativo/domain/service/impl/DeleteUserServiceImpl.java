@@ -16,10 +16,9 @@ public class DeleteUserServiceImpl implements DeleteUserService {
     @Autowired
     private UserRoleRepository userRoleRepository;
     @Override
-    public HttpStatus deleteUser(String ident) {
+    public void deleteUser(String ident) {
         String id_user = userRepository.getUserByIdent(ident).getId_user();
         userRoleRepository.deleteRoleByUserId(id_user);
         userRepository.deleteUserByIdent(ident);
-        return HttpStatus.OK;
     }
 }

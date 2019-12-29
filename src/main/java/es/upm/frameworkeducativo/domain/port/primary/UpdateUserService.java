@@ -4,5 +4,5 @@ import es.upm.frameworkeducativo.domain.model.User;
 import org.springframework.http.HttpStatus;
 
 public interface UpdateUserService {
-    public HttpStatus updateUser(User user);
+    public void updateUser(User user) throws Exception;
 }

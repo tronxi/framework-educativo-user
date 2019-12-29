@@ -7,6 +7,7 @@ import es.upm.frameworkeducativo.domain.port.primary.LoadUserService;
 import es.upm.frameworkeducativo.domain.port.primary.UpdateUserService;
 import es.upm.frameworkeducativo.infrastructure.api.rest.model.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,12 @@ public class UserAdapter {
 
     public ResponseEntity updateUserAdapter(UserDTO userDTO) {
         User user = userDTOToUser(userDTO);
-        return new ResponseEntity(updateUserService.updateUser(user));
+        try {
+            updateUserService.updateUser(user);
+            return new ResponseEntity(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
     }
 
     public ResponseEntity<UserDTO> getUserByIdentAdapter(String ident) {
@@ -47,7 +53,8 @@ public class UserAdapter {
     }
 
     public ResponseEntity deleteUserByIdent(String ident) {
-        return new ResponseEntity(deleteUserService.deleteUser(ident));
+        deleteUserService.deleteUser(ident);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     public ResponseEntity<UserDTO> getUserByEmailAdapter(String email) {
