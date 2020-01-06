@@ -13,14 +13,20 @@ import java.util.stream.Collectors;
 
 @Service
 public class LoadUserServiceImpl implements LoadUserService {
-    @Autowired
+
     private IUserRepository userRepository;
-
-    @Autowired
     private IRoleRepository roleRepository;
+    private IUserRoleRepository userRoleRepository;
 
     @Autowired
-    private IUserRoleRepository userRoleRepository;
+    public LoadUserServiceImpl(IUserRoleRepository userRoleRepository,
+                               IRoleRepository roleRepository,
+                               IUserRepository userRepository) {
+        this.roleRepository = roleRepository;
+        this.userRepository = userRepository;
+        this.userRoleRepository = userRoleRepository;
+
+    }
 
     @Override
     public void loadUsers(List<User> user) {

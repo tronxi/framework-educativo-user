@@ -13,14 +13,20 @@ import java.util.stream.Collectors;
 
 @Service
 public class FindUserServiceImpl implements FindUserService {
-    @Autowired
     private IUserRepository userRepository;
 
-    @Autowired
     private IRoleRepository roleRepository;
 
-    @Autowired
     private IUserRoleRepository userRoleRepository;
+
+    @Autowired
+    public FindUserServiceImpl(IUserRepository userRepository,
+                               IRoleRepository roleRepository,
+                               IUserRoleRepository userRoleRepository) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.userRoleRepository = userRoleRepository;
+    }
 
     @Override
     public User findUserByIdent(String ident) {

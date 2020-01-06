@@ -10,11 +10,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class DeleteUserServiceImpl implements DeleteUserService {
 
-    @Autowired
     private UserRepository userRepository;
 
-    @Autowired
     private UserRoleRepository userRoleRepository;
+
+    @Autowired
+    public DeleteUserServiceImpl(UserRepository userRepository,
+                                 UserRoleRepository userRoleRepository) {
+        this.userRepository = userRepository;
+        this.userRoleRepository = userRoleRepository;
+    }
     @Override
     public void deleteUser(String ident) {
         String id_user = userRepository.getUserByIdent(ident).getId_user();
