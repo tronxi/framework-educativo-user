@@ -1,4 +1,4 @@
-package es.upm.frameworkeducativo.domain.port.secundary;
+package es.upm.frameworkeducativo.infrastructure.repository;
 
 import es.upm.frameworkeducativo.infrastructure.repository.model.RoleDAO;
 

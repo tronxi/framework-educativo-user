@@ -1,7 +1,7 @@
 package es.upm.frameworkeducativo.infrastructure.security.service;
 
 import es.upm.frameworkeducativo.infrastructure.repository.RoleRepository;
-import es.upm.frameworkeducativo.infrastructure.repository.UserRepository;
+import es.upm.frameworkeducativo.infrastructure.repository.UserRepositoryAdapter;
 import es.upm.frameworkeducativo.infrastructure.repository.UserRoleRepository;
 import es.upm.frameworkeducativo.infrastructure.repository.model.UserRoleDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ import java.util.stream.Collectors;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepositoryAdapter userRepositoryAdapter;
 
     @Autowired
     private RoleRepository roleRepository;
@@ -32,7 +31,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String user) throws UsernameNotFoundException {
-        if (userRepository.getUserByEmail(user) != null) {
+        if (userRepositoryAdapter.getUserByEmail(user) != null) {
             return this.userBuilder(user, this.getUserPassword(user), this.getRolesByUser(user));
         }
         else {
@@ -41,12 +40,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     private String getUserPassword(String user) {
-        return userRepository.getUserPasswordByEmail(user);
+        return userRepositoryAdapter.getUserPasswordByEmail(user);
         //return new BCryptPasswordEncoder().encode(userRepository.getUserPasswordByEmail(user));
     }
 
     private List<String> getRolesByUser(String user) {
-        String userId = userRepository.getUserIdByEmail(user);
+        String userId = userRepositoryAdapter.getUserIdByEmail(user);
         List<UserRoleDAO> userRoles = userRoleRepository.getRolesByUserId(userId);
 
         return userRoles.stream()

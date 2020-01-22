@@ -1,6 +1,5 @@
 package es.upm.frameworkeducativo.infrastructure.repository;
 
-import es.upm.frameworkeducativo.domain.port.secundary.IUserRoleRepository;
 import es.upm.frameworkeducativo.infrastructure.repository.mappers.UserRoleMapper;
 import es.upm.frameworkeducativo.infrastructure.repository.model.UserRoleDAO;
 import org.springframework.beans.factory.annotation.Autowired;

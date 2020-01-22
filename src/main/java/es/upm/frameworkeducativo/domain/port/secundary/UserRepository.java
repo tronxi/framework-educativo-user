@@ -2,7 +2,7 @@ package es.upm.frameworkeducativo.domain.port.secundary;
 
 import es.upm.frameworkeducativo.domain.model.User;
 
-public interface IUserRepository {
+public interface UserRepository {
     User getUserByIdent(String ident);
     User getUserByEmail(String email);
     String getUserIdByEmail(String email);

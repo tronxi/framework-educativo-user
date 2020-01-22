@@ -1,7 +1,7 @@
 package es.upm.frameworkeducativo.infrastructure.api.rest.resources;
 
 
-import es.upm.frameworkeducativo.infrastructure.repository.UserRepository;
+import es.upm.frameworkeducativo.infrastructure.repository.UserRepositoryAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 //@PreAuthorize("authenticated")
 public class StatusResource {
     @Autowired
-    private UserRepository userRepository;
+    private UserRepositoryAdapter userRepositoryAdapter;
     @Value("${environment:entorno por defecto}")
     private String environment;
 
@@ -48,7 +48,7 @@ public class StatusResource {
 
     @RequestMapping(value = "test", method = RequestMethod.GET)
     public String test() {
-        System.out.println(userRepository.getUserByEmail("admin@upm"));
+        System.out.println(userRepositoryAdapter.getUserByEmail("admin@upm"));
         return "";
     }
 

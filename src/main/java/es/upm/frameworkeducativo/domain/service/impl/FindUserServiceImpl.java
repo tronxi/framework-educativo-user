@@ -2,7 +2,7 @@ package es.upm.frameworkeducativo.domain.service.impl;
 
 import es.upm.frameworkeducativo.domain.model.User;
 import es.upm.frameworkeducativo.domain.port.primary.FindUserService;
-import es.upm.frameworkeducativo.domain.port.secundary.IUserRepository;
+import es.upm.frameworkeducativo.domain.port.secundary.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class FindUserServiceImpl implements FindUserService {
 
-    private final IUserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Override
     public User findUserByIdent(String ident) {

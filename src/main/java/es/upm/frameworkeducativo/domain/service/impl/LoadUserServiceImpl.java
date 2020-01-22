@@ -2,7 +2,7 @@ package es.upm.frameworkeducativo.domain.service.impl;
 
 import es.upm.frameworkeducativo.domain.model.User;
 import es.upm.frameworkeducativo.domain.port.primary.LoadUserService;
-import es.upm.frameworkeducativo.domain.port.secundary.IUserRepository;
+import es.upm.frameworkeducativo.domain.port.secundary.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class LoadUserServiceImpl implements LoadUserService {
 
-    private final IUserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Override
     public void loadUsers(List<User> user) {

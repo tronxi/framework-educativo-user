@@ -2,11 +2,10 @@ package es.upm.frameworkeducativo.domain.service.impl
 
 import es.upm.frameworkeducativo.domain.model.User
 import es.upm.frameworkeducativo.domain.port.primary.FindUserService
-import es.upm.frameworkeducativo.domain.port.secundary.IRoleRepository
-import es.upm.frameworkeducativo.domain.port.secundary.IUserRepository
-import es.upm.frameworkeducativo.domain.port.secundary.IUserRoleRepository
+import es.upm.frameworkeducativo.infrastructure.repository.IRoleRepository
+import es.upm.frameworkeducativo.infrastructure.repository.IUserRoleRepository
 import es.upm.frameworkeducativo.infrastructure.repository.RoleRepository
-import es.upm.frameworkeducativo.infrastructure.repository.UserRepository
+import es.upm.frameworkeducativo.infrastructure.repository.UserRepositoryAdapter
 import es.upm.frameworkeducativo.infrastructure.repository.UserRoleRepository
 import es.upm.frameworkeducativo.infrastructure.repository.model.UserRoleDAO
 import spock.lang.Shared
@@ -14,7 +13,7 @@ import spock.lang.Specification
 
 class FindUserServiceImplTest extends Specification {
     @Shared
-    IUserRepository userRepository
+    es.upm.frameworkeducativo.domain.port.secundary.UserRepository userRepository
     @Shared
     IRoleRepository roleRepository
     @Shared
@@ -24,7 +23,7 @@ class FindUserServiceImplTest extends Specification {
     FindUserService findUserService
 
     def setup() {
-        userRepository = Mock(UserRepository)
+        userRepository = Mock(UserRepositoryAdapter)
         roleRepository = Mock(RoleRepository)
         userRoleRepository = Mock(UserRoleRepository)
 
