@@ -1,4 +1,4 @@
-package es.upm.frameworkeducativo.domain.service.impl;
+package es.upm.frameworkeducativo.domain.useCase;
 
 import es.upm.frameworkeducativo.domain.model.User;
 import es.upm.frameworkeducativo.domain.port.primary.LoadUserService;
@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
-public class LoadUserServiceImpl implements LoadUserService {
+public class LoadUserServiceUseCase implements LoadUserService {
 
     private final UserRepository userRepository;
 

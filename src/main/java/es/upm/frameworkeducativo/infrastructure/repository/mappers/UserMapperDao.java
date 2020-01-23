@@ -1,21 +1,18 @@
 package es.upm.frameworkeducativo.infrastructure.repository.mappers;
 
-import es.upm.frameworkeducativo.infrastructure.repository.model.UserDAO;
+import es.upm.frameworkeducativo.infrastructure.repository.model.UserEntity;
 import org.apache.ibatis.annotations.*;
-import org.apache.ibatis.exceptions.PersistenceException;
-
-import java.util.List;
 
 @Mapper
-public interface UserMapper {
+public interface UserMapperDao {
 
     @Select("select ID_USER, IDENT, NAME, SURNAMES, PASSWORD, EMAIL, IS_CHANGED " +
             "FROM USER WHERE IDENT = #{ident}")
-    UserDAO getUserByIdent(String ident);
+    UserEntity getUserByIdent(String ident);
 
     @Select("select ID_USER, IDENT, NAME, SURNAMES, PASSWORD, EMAIL, IS_CHANGED " +
             "FROM USER WHERE EMAIL = #{email}")
-    UserDAO getUserByEmail(String email);
+    UserEntity getUserByEmail(String email);
 
     @Select("insert into USER (IDENT, NAME, SURNAMES, PASSWORD, EMAIL, IS_CHANGED) VALUES" +
             "(#{ident}, #{name}, #{surnames}, #{password} ,#{email}, #{isChanged})")

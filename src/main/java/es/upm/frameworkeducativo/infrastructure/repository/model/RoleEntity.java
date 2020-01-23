@@ -5,7 +5,7 @@ import lombok.Value;
 
 @Value
 @AllArgsConstructor
-public class RoleDAO {
+public class RoleEntity {
     private String id_role;
     private String description;
 }

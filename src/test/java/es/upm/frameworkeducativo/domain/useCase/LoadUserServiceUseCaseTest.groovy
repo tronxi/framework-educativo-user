@@ -1,4 +1,4 @@
-package es.upm.frameworkeducativo.domain.service.impl
+package es.upm.frameworkeducativo.domain.useCase
 
 
 import es.upm.frameworkeducativo.domain.port.primary.LoadUserService
@@ -10,7 +10,7 @@ import es.upm.frameworkeducativo.infrastructure.repository.UserRoleRepository
 import spock.lang.Shared
 import spock.lang.Specification
 
-class LoadUserServiceImplTest extends Specification {
+class LoadUserServiceUseCaseTest extends Specification {
     @Shared
     es.upm.frameworkeducativo.domain.port.secundary.UserRepository userRepository
     @Shared
@@ -26,7 +26,7 @@ class LoadUserServiceImplTest extends Specification {
         roleRepository = Mock(RoleRepository)
         userRoleRepository = Mock(UserRoleRepository)
 
-        loadUserService = new LoadUserServiceImpl(userRoleRepository,
+        loadUserService = new LoadUserServiceUseCase(userRoleRepository,
                                                     roleRepository,
                                                     userRepository)
     }

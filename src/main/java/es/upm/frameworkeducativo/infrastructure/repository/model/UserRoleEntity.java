@@ -7,7 +7,7 @@ import lombok.Value;
 @Value
 @AllArgsConstructor
 @Builder
-public class UserRoleDAO {
+public class UserRoleEntity {
     private String id_user;
     private String id_role;
 }

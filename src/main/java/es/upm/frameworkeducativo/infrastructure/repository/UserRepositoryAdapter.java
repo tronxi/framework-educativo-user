@@ -2,8 +2,8 @@ package es.upm.frameworkeducativo.infrastructure.repository;
 
 import es.upm.frameworkeducativo.domain.model.User;
 import es.upm.frameworkeducativo.domain.port.secundary.UserRepository;
-import es.upm.frameworkeducativo.infrastructure.repository.mappers.UserMapper;
-import es.upm.frameworkeducativo.infrastructure.repository.model.UserDAO;
+import es.upm.frameworkeducativo.infrastructure.repository.mappers.UserMapperDao;
+import es.upm.frameworkeducativo.infrastructure.repository.model.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,19 +16,19 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserRepositoryAdapter implements UserRepository {
 
-    private final UserMapper userMapper;
+    private final UserMapperDao userMapperDao;
     private final IRoleRepository roleRepository;
     private final IUserRoleRepository userRoleRepository;
 
     @Override
     public User getUserByIdent(String ident) {
-        User user = userDAOToUser(userMapper.getUserByIdent(ident));
+        User user = userDAOToUser(userMapperDao.getUserByIdent(ident));
         return setRoles(user);
     }
 
     @Override
     public User getUserByEmail(String email) {
-        User user = userDAOToUser(userMapper.getUserByEmail(email));
+        User user = userDAOToUser(userMapperDao.getUserByEmail(email));
         return setRoles(user);
     }
 
@@ -53,7 +53,7 @@ public class UserRepositoryAdapter implements UserRepository {
     @Override
     public void saveUser(User user) throws Exception {
         try {
-            userMapper.saveUser(
+            userMapperDao.saveUser(
                     user.getIdent(),
                     user.getName(), user.getSurnames(),
                     new BCryptPasswordEncoder().encode(user.getPassword()),
@@ -71,7 +71,7 @@ public class UserRepositoryAdapter implements UserRepository {
     public void updateUser(User user) throws Exception {
         try {
             userRoleRepository.deleteRoleByUserId(user.getId_user());
-            userMapper.updateUser(
+            userMapperDao.updateUser(
                     user.getIdent(),
                     user.getName(), user.getSurnames(),
                     new BCryptPasswordEncoder().encode(user.getPassword()),
@@ -89,18 +89,18 @@ public class UserRepositoryAdapter implements UserRepository {
     public void deleteUserByIdent(String ident) {
         String id_user = getUserByIdent(ident).getId_user();
         userRoleRepository.deleteRoleByUserId(id_user);
-        userMapper.deleteUserByIdent(ident);
+        userMapperDao.deleteUserByIdent(ident);
     }
 
-    private User userDAOToUser(UserDAO userDAO) {
+    private User userDAOToUser(UserEntity userEntity) {
         return User.builder()
-                .id_user(userDAO.getId_user())
-                .ident(userDAO.getIdent())
-                .name(userDAO.getName())
-                .surnames(userDAO.getSurnames())
-                .password(userDAO.getPassword())
-                .email(userDAO.getEmail())
-                .isChanged(userDAO.getIsChanged())
+                .id_user(userEntity.getId_user())
+                .ident(userEntity.getIdent())
+                .name(userEntity.getName())
+                .surnames(userEntity.getSurnames())
+                .password(userEntity.getPassword())
+                .email(userEntity.getEmail())
+                .isChanged(userEntity.getIsChanged())
                 .build();
     }
 

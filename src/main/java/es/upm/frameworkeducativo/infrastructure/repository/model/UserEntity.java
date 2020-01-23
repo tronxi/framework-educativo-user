@@ -4,12 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Value;
 
-import java.util.List;
-
 @AllArgsConstructor
 @Value
 @Builder
-public class UserDAO {
+public class UserEntity {
     private String id_user;
     private String ident;
     private String name;

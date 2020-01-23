@@ -1,18 +1,19 @@
 package es.upm.frameworkeducativo.infrastructure.repository;
 
-import es.upm.frameworkeducativo.infrastructure.repository.model.RoleDAO;
+import es.upm.frameworkeducativo.infrastructure.repository.model.RoleEntity;
 import es.upm.frameworkeducativo.infrastructure.repository.mappers.RoleMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class RoleRepository implements IRoleRepository {
 
-    @Autowired
-    private RoleMapper roleMapper;
+    private final RoleMapper roleMapper;
 
     @Override
-    public RoleDAO getRolesById(String id_role) {
+    public RoleEntity getRolesById(String id_role) {
         return roleMapper.getRoleById(id_role);
     }
 

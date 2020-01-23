@@ -1,9 +1,15 @@
 package es.upm.frameworkeducativo.infrastructure.api.rest.resources;
 
-import es.upm.frameworkeducativo.infrastructure.api.rest.mapper.UserMapperInfrastructure;
+import es.upm.frameworkeducativo.domain.model.User;
+import es.upm.frameworkeducativo.domain.port.primary.DeleteUserService;
+import es.upm.frameworkeducativo.domain.port.primary.FindUserService;
+import es.upm.frameworkeducativo.domain.port.primary.LoadUserService;
+import es.upm.frameworkeducativo.domain.port.primary.UpdateUserService;
+import es.upm.frameworkeducativo.infrastructure.api.rest.mapper.UserMapper;
 import es.upm.frameworkeducativo.infrastructure.api.rest.model.UserDTO;
 import es.upm.frameworkeducativo.infrastructure.security.service.JwtService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,18 +20,22 @@ import java.util.List;
 @RestController
 @RequestMapping("user-service/user")
 @PreAuthorize("authenticated")
+@RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    private UserMapperInfrastructure userMapperInfrastructure;
-
-    @Autowired
-    private JwtService jwtService;
+    private final UserMapper userMapperInfrastructure;
+    private final JwtService jwtService;
+    private final LoadUserService loadUserService;
+    private final FindUserService findUserService;
+    private final UpdateUserService updateUserService;
+    private final DeleteUserService deleteUserService;
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping()
     public ResponseEntity loadUsers(@RequestBody List<UserDTO> users) {
-        return userMapperInfrastructure.userLoadAdapter(users);
+        List<User> user = userMapperInfrastructure.userDTOListTOUserList(users);
+        loadUserService.loadUsers(user);
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -33,19 +43,28 @@ public class UserController {
     public ResponseEntity<UserDTO> getUsers(@RequestParam String ident,
                                             @RequestHeader("authorization") String header) {
         System.out.println(jwtService.user(header));
-        return userMapperInfrastructure.getUserByIdentAdapter(ident);
+        User user = findUserService.findUserByIdent(ident);
+        UserDTO userDTO = userMapperInfrastructure.userToUserDTO(user);
+        return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping()
     public ResponseEntity updateUser(@RequestBody UserDTO userDTO) {
-        return userMapperInfrastructure.updateUserAdapter(userDTO);
+        User user = userMapperInfrastructure.userDTOToUser(userDTO);
+        try {
+            updateUserService.updateUser(user);
+            return new ResponseEntity(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping()
     public ResponseEntity deleteUser(@RequestParam String ident) {
-        return userMapperInfrastructure.deleteUserByIdent(ident);
+        deleteUserService.deleteUser(ident);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
 }

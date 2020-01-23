@@ -1,4 +1,4 @@
-package es.upm.frameworkeducativo.domain.service.impl
+package es.upm.frameworkeducativo.domain.useCase
 
 import es.upm.frameworkeducativo.domain.model.User
 import es.upm.frameworkeducativo.domain.port.primary.FindUserService
@@ -7,11 +7,11 @@ import es.upm.frameworkeducativo.infrastructure.repository.IUserRoleRepository
 import es.upm.frameworkeducativo.infrastructure.repository.RoleRepository
 import es.upm.frameworkeducativo.infrastructure.repository.UserRepositoryAdapter
 import es.upm.frameworkeducativo.infrastructure.repository.UserRoleRepository
-import es.upm.frameworkeducativo.infrastructure.repository.model.UserRoleDAO
+import es.upm.frameworkeducativo.infrastructure.repository.model.UserRoleEntity
 import spock.lang.Shared
 import spock.lang.Specification
 
-class FindUserServiceImplTest extends Specification {
+class FindUserServiceUseCaseTest extends Specification {
     @Shared
     es.upm.frameworkeducativo.domain.port.secundary.UserRepository userRepository
     @Shared
@@ -27,7 +27,7 @@ class FindUserServiceImplTest extends Specification {
         roleRepository = Mock(RoleRepository)
         userRoleRepository = Mock(UserRoleRepository)
 
-        findUserService = new FindUserServiceImpl(userRepository, roleRepository, userRoleRepository)
+        findUserService = new FindUserServiceUseCase(userRepository, roleRepository, userRoleRepository)
     }
 
     def "find user by ident" () {
@@ -39,11 +39,11 @@ class FindUserServiceImplTest extends Specification {
         List<String> roles = new ArrayList<>()
         roles.add("ROLE_ADMIN")
 
-        UserRoleDAO userRoleDAO = UserRoleDAO.builder()
+        UserRoleEntity userRoleDAO = UserRoleEntity.builder()
                                     .id_user(idUser)
                                     .id_role(idRole)
                                     .build()
-        List<UserRoleDAO> userRoleDAOList = new ArrayList<>()
+        List<UserRoleEntity> userRoleDAOList = new ArrayList<>()
         userRoleDAOList.add(userRoleDAO)
 
         User user = User

@@ -1,20 +1,20 @@
 package es.upm.frameworkeducativo.infrastructure.repository;
 
 import es.upm.frameworkeducativo.infrastructure.repository.mappers.UserRoleMapper;
-import es.upm.frameworkeducativo.infrastructure.repository.model.UserRoleDAO;
-import org.springframework.beans.factory.annotation.Autowired;
+import es.upm.frameworkeducativo.infrastructure.repository.model.UserRoleEntity;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class UserRoleRepository implements IUserRoleRepository {
 
-    @Autowired
-    private UserRoleMapper userRoleMapper;
+    private final UserRoleMapper userRoleMapper;
 
     @Override
-    public List<UserRoleDAO> getRolesByUserId(String id_user) {
+    public List<UserRoleEntity> getRolesByUserId(String id_user) {
         return userRoleMapper.getRoleByUserId(id_user);
     }
 

@@ -1,4 +1,4 @@
-package es.upm.frameworkeducativo.domain.service.impl;
+package es.upm.frameworkeducativo.domain.useCase;
 
 import es.upm.frameworkeducativo.domain.port.primary.DeleteUserService;
 import es.upm.frameworkeducativo.domain.port.secundary.UserRepository;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class DeleteUserServiceImpl implements DeleteUserService {
+public class DeleteUserServiceUseCase implements DeleteUserService {
 
     private final UserRepository userRepository;
 

@@ -1,4 +1,4 @@
-package es.upm.frameworkeducativo.domain.service.impl;
+package es.upm.frameworkeducativo.domain.useCase;
 
 import es.upm.frameworkeducativo.domain.model.User;
 import es.upm.frameworkeducativo.domain.port.primary.FindUserService;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class FindUserServiceImpl implements FindUserService {
+public class FindUserServiceUseCase implements FindUserService {
 
     private final UserRepository userRepository;
 

@@ -1,4 +1,4 @@
-package es.upm.frameworkeducativo.domain.service.impl
+package es.upm.frameworkeducativo.domain.useCase
 
 import es.upm.frameworkeducativo.domain.model.User
 import es.upm.frameworkeducativo.domain.port.primary.DeleteUserService
@@ -7,7 +7,7 @@ import es.upm.frameworkeducativo.infrastructure.repository.UserRoleRepository
 import spock.lang.Shared
 import spock.lang.Specification
 
-class DeleteUserServiceImplTest extends Specification {
+class DeleteUserServiceUseCaseTest extends Specification {
     @Shared
     UserRepositoryAdapter userRepository
     @Shared
@@ -20,7 +20,7 @@ class DeleteUserServiceImplTest extends Specification {
         userRepository = Mock(UserRepositoryAdapter)
         userRoleRepository = Mock(UserRoleRepository)
 
-        deleteUserService = new DeleteUserServiceImpl(userRepository, userRoleRepository)
+        deleteUserService = new DeleteUserServiceUseCase(userRepository, userRoleRepository)
     }
 
     def "delete user" () {

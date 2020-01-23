@@ -3,7 +3,7 @@ package es.upm.frameworkeducativo.infrastructure.security.service;
 import es.upm.frameworkeducativo.infrastructure.repository.RoleRepository;
 import es.upm.frameworkeducativo.infrastructure.repository.UserRepositoryAdapter;
 import es.upm.frameworkeducativo.infrastructure.repository.UserRoleRepository;
-import es.upm.frameworkeducativo.infrastructure.repository.model.UserRoleDAO;
+import es.upm.frameworkeducativo.infrastructure.repository.model.UserRoleEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -46,10 +46,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     private List<String> getRolesByUser(String user) {
         String userId = userRepositoryAdapter.getUserIdByEmail(user);
-        List<UserRoleDAO> userRoles = userRoleRepository.getRolesByUserId(userId);
+        List<UserRoleEntity> userRoles = userRoleRepository.getRolesByUserId(userId);
 
         return userRoles.stream()
-                .map(userRoleDAO -> roleRepository.getRolesById(userRoleDAO.getId_role()).getDescription())
+                .map(userRoleEntity -> roleRepository.getRolesById(userRoleEntity.getId_role()).getDescription())
                 .collect(Collectors.toList());
     }
 
