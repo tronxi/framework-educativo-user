@@ -4,9 +4,10 @@ import es.upm.frameworkeducativo.domain.model.User
 import es.upm.frameworkeducativo.domain.port.primary.DeleteUserService
 import es.upm.frameworkeducativo.infrastructure.repository.UserRepositoryAdapter
 import es.upm.frameworkeducativo.infrastructure.repository.UserRoleRepository
+import spock.lang.Ignore
 import spock.lang.Shared
 import spock.lang.Specification
-
+@Ignore
 class DeleteUserServiceUseCaseTest extends Specification {
     @Shared
     UserRepositoryAdapter userRepository
