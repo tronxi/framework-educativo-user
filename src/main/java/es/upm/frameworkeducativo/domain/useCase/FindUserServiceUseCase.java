@@ -24,7 +24,7 @@ public class FindUserServiceUseCase implements FindUserService {
 
     @Override
     public User findUserByIdUser(String id_user) {
-        return null;
+        return userRepository.getUserByIdUser(id_user);
     }
 
 }

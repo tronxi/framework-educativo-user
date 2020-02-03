@@ -49,6 +49,15 @@ public class UserController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UserDTO> getUsersById(@PathVariable String id,
+                                            @RequestHeader("authorization") String header) {
+        User user = findUserService.findUserByIdUser(id);
+        UserDTO userDTO = userMapperInfrastructure.userToUserDTO(user);
+        return new ResponseEntity<>(userDTO, HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping()
     public ResponseEntity updateUser(@RequestBody UserDTO userDTO) {
         User user = userMapperInfrastructure.userDTOToUser(userDTO);

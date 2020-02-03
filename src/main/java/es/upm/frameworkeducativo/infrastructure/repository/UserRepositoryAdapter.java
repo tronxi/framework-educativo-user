@@ -21,6 +21,12 @@ public class UserRepositoryAdapter implements UserRepository {
     private final IUserRoleRepository userRoleRepository;
 
     @Override
+    public User getUserByIdUser(String idUser) {
+        User user = userDAOToUser(userMapperDao.getUserByIdUser(idUser));
+        return  setRoles(user);
+    }
+
+    @Override
     public User getUserByIdent(String ident) {
         User user = userDAOToUser(userMapperDao.getUserByIdent(ident));
         return setRoles(user);

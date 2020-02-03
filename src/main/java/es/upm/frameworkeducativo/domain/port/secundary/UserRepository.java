@@ -5,6 +5,7 @@ import es.upm.frameworkeducativo.domain.model.User;
 public interface UserRepository {
     User getUserByIdent(String ident);
     User getUserByEmail(String email);
+    User getUserByIdUser(String idUser);
     String getUserIdByEmail(String email);
     String getUserPasswordByEmail(String email);
     void saveUser(User user) throws Exception;
