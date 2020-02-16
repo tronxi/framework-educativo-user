@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    username: pi
+    password: ENC(+Tb6CL+hH5md5GjPcqoz2PRUrl2KopUp)
+    url: jdbc:mysql://raspberrytronxi.ddns.net:3306/framework-educativo-user-dev?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    driver-class-name: com.mysql.jdbc.Driver
+    #initialization-mode: embedded
+  application:
+    name: user
+server:
+  port: 8081
+
+eureka:
+  instance:
+    status-page-url-path: /actuator/health
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+  client:
+    serviceUrl:
+      defaultZone: ${eureka-host}:8762/eureka/
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5
