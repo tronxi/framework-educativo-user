@@ -4,9 +4,9 @@ spring:
     password: ENC(+Tb6CL+hH5md5GjPcqoz2PRUrl2KopUp)
   application:
     name: user
-  cloud:
-    client:
-      hostname: http://raspberrytronxi.ddns.net
+#  cloud:
+#    client:
+#      hostname: http://raspberrytronxi.ddns.net
 server:
   port: 8081
 
