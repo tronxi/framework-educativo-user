@@ -17,7 +17,7 @@ eureka:
     leaseExpirationDurationInSeconds: 2
   client:
     serviceUrl:
-      defaultZone: ${eureka-host}:8762/eureka/
+      defaultZone: ${eureka-host}:8761/eureka/
     healthcheck:
       enabled: true
     lease:
