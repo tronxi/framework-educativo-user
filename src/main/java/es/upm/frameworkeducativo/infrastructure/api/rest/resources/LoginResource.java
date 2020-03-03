@@ -22,6 +22,7 @@ public class LoginResource {
     public String login(@AuthenticationPrincipal User activeUser) {
         List<String> roleList = activeUser.getAuthorities().stream().map
                 (authority -> authority.getAuthority()).collect(Collectors.toList());
+        System.out.println("login");
         return jwtService.createToken(activeUser.getUsername(), roleList);
     }
 }
