@@ -15,7 +15,6 @@ eureka:
     status-page-url-path: /actuator/health
     leaseRenewalIntervalInSeconds: 1
     leaseExpirationDurationInSeconds: 2
-    preferIpAddress: true
   client:
     serviceUrl:
       defaultZone: ${eureka-host}:8761/eureka/
