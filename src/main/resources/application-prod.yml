@@ -10,14 +10,14 @@ spring:
 server:
   port: 8081
 
-service-name: user-service
+user-service: user-service
 
 eureka:
   instance:
     status-page-url-path: /actuator/health
     leaseRenewalIntervalInSeconds: 1
     leaseExpirationDurationInSeconds: 2
-    hostname: ${service-name}
+    hostname: ${user-service}
   client:
     serviceUrl:
       defaultZone: ${eureka-host}:8761/eureka/
