@@ -11,7 +11,7 @@ RUN mvn package spring-boot:repackage
 FROM openjdk:8-alpine
 ENV clave clave
 ENV eureka_host http://localhost
-ENV user-service user-service
+ENV user_service user-service
 ENV profile dev
 COPY --from="builder" /target/framework-educativo-0.0.1-SNAPSHOT.jar .
-CMD java -jar -Dspring.profiles.active=${profile} -Djasypt.encryptor.password=${clave} framework-educativo-0.0.1-SNAPSHOT.jar --eureka-host=${eureka_host} --user-service=${user-service}
+CMD java -jar -Dspring.profiles.active=${profile} -Djasypt.encryptor.password=${clave} framework-educativo-0.0.1-SNAPSHOT.jar --eureka-host=${eureka_host} --user-service=${user_service}
