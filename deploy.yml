@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: framework-educativo-user
+  labels:
+    app: framework-educativo-user
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: framework-educativo-user
+  template:
+    metadata:
+      labels:
+        app: framework-educativo-user
+    spec:
+      containers:
+        - name: framework-educativo-user
+          image: tronxi/framework-educativo-user:${USER_TAG}
+          resources:
+            limits:
+              cpu: "0.4"
+              memory: "512Mi"
+            requests:
+              cpu: "0.3"
+              memory: "400Mi"
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8081
+            initialDelaySeconds: 90
+            periodSeconds: 30
+
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8081
+            initialDelaySeconds: 90
+            periodSeconds: 30
+          env:
+            - name: profile
+              valueFrom:
+                configMapKeyRef:
+                  name: framework-educativo-config-map
+                  key: profile
+            - name: clave
+              valueFrom:
+                secretKeyRef:
+                  name: framework-educativo-secret
+                  key: clave
+            - name: eureka_host
+              valueFrom:
+                configMapKeyRef:
+                  name: framework-educativo-config-map
+                  key: eureka_host
+            - name: user_service
+              valueFrom:
+                configMapKeyRef:
+                  name: framework-educativo-config-map
+                  key: user_service
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service
+  labels:
+    app: framework-educativo-user
+spec:
+  selector:
+    app: framework-educativo-user
+  ports:
+    - protocol: TCP
+      port: 8081
+      targetPort: 8081
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: framework-educativo-user
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: framework-educativo-user
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 50
