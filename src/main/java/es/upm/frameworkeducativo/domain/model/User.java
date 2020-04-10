@@ -3,12 +3,14 @@ package es.upm.frameworkeducativo.domain.model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @Builder
+@NoArgsConstructor
 public class User {
     private String id_user;
     private String ident;

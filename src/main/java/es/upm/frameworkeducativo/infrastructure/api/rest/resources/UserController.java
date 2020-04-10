@@ -58,9 +58,8 @@ public class UserController {
         return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
 
-    //TODO get users by list id
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/subject", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<UserDTO>> getListUsersById(@RequestBody List<String> listId) {
         List<User> userList = findUserService.findListUserByIdUser(listId);
         List<UserDTO> userDTOList = userList.stream()
