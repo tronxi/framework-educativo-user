@@ -16,6 +16,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("user-service/user")
@@ -55,6 +56,17 @@ public class UserController {
         User user = findUserService.findUserByIdUser(id);
         UserDTO userDTO = userMapperInfrastructure.userToUserDTO(user);
         return new ResponseEntity<>(userDTO, HttpStatus.OK);
+    }
+
+    //TODO get users by list id
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<UserDTO>> getListUsersById(@RequestBody List<String> listId) {
+        List<User> userList = findUserService.findListUserByIdUser(listId);
+        List<UserDTO> userDTOList = userList.stream()
+                .map(userMapperInfrastructure::userToUserDTO)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(userDTOList, HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('ADMIN')")

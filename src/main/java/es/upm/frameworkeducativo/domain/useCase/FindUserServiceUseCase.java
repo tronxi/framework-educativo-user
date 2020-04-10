@@ -6,6 +6,9 @@ import es.upm.frameworkeducativo.domain.port.secundary.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class FindUserServiceUseCase implements FindUserService {
@@ -25,6 +28,13 @@ public class FindUserServiceUseCase implements FindUserService {
     @Override
     public User findUserByIdUser(String id_user) {
         return userRepository.getUserByIdUser(id_user);
+    }
+
+    @Override
+    public List<User> findListUserByIdUser(List<String> listId) {
+        return listId.stream()
+                .map(userRepository::getUserByIdUser)
+                .collect(Collectors.toList());
     }
 
 }
