@@ -40,13 +40,21 @@ public class UserController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(params = "ident", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDTO> getUsers(@RequestParam String ident,
                                             @RequestHeader("authorization") String header) {
         System.out.println(jwtService.user(header));
         User user = findUserService.findUserByIdent(ident);
         UserDTO userDTO = userMapperInfrastructure.userToUserDTO(user);
         return new ResponseEntity<>(userDTO, HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping(params = "role", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<UserDTO>> getUsersByRole(@RequestParam String role) {
+        List<User> userList = findUserService.findListUserByRole(role);
+        List<UserDTO> userDTOList = userMapperInfrastructure.userListTOUserDTOList(userList);
+        return new ResponseEntity<>(userDTOList, HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('ADMIN')")

@@ -24,19 +24,19 @@ public class UserRepositoryAdapter implements UserRepository {
 
     @Override
     public User getUserByIdUser(String idUser) {
-        User user = userDAOToUser(userMapperDao.getUserByIdUser(idUser));
+        User user = userEntityToUser(userMapperDao.getUserByIdUser(idUser));
         return  setRoles(user);
     }
 
     @Override
     public User getUserByIdent(String ident) {
-        User user = userDAOToUser(userMapperDao.getUserByIdent(ident));
+        User user = userEntityToUser(userMapperDao.getUserByIdent(ident));
         return setRoles(user);
     }
 
     @Override
     public User getUserByEmail(String email) {
-        User user = userDAOToUser(userMapperDao.getUserByEmail(email));
+        User user = userEntityToUser(userMapperDao.getUserByEmail(email));
         return setRoles(user);
     }
 
@@ -56,6 +56,14 @@ public class UserRepositoryAdapter implements UserRepository {
     @Override
     public String getUserPasswordByEmail(String email) {
         return this.getUserByEmail(email).getPassword();
+    }
+
+    @Override
+    public List<User> getUserListByRole(String role) {
+        List<UserEntity> userEntityList = userMapperDao.getUserListByRole(role);
+        return userEntityList.stream()
+                .map(this::userEntityToUser)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -102,7 +110,7 @@ public class UserRepositoryAdapter implements UserRepository {
         deleteUserEvent.deleteUserEvent(user);
     }
 
-    private User userDAOToUser(UserEntity userEntity) {
+    private User userEntityToUser(UserEntity userEntity) {
         return User.builder()
                 .id_user(userEntity.getId_user())
                 .ident(userEntity.getIdent())

@@ -37,4 +37,9 @@ public class FindUserServiceUseCase implements FindUserService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<User> findListUserByRole(String role) {
+        return userRepository.getUserListByRole(role);
+    }
+
 }

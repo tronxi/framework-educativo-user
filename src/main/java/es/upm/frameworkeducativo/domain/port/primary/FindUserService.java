@@ -9,4 +9,5 @@ public interface FindUserService {
     User findUserByEmail(String email);
     User findUserByIdUser(String id_user);
     List<User> findListUserByIdUser(List<String> listId);
+    List<User> findListUserByRole(String role);
 }

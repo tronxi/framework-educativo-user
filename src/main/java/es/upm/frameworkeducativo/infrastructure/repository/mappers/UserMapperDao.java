@@ -3,6 +3,8 @@ package es.upm.frameworkeducativo.infrastructure.repository.mappers;
 import es.upm.frameworkeducativo.infrastructure.repository.model.UserEntity;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 @Mapper
 public interface UserMapperDao {
 
@@ -32,5 +34,14 @@ public interface UserMapperDao {
 
     @Delete("delete from USER where ident = #{ident}")
     void deleteUserByIdent(String ident);
+
+    @Select("select u.ID_USER, u.IDENT, u.NAME, u.SURNAMES, u.PASSWORD, u.EMAIL, u.IS_CHANGED " +
+            "from USER u " +
+            "inner join USER_ROLE ur on u.ID_USER = ur.ID_USER " +
+            "   and ur.ID_ROLE = (" +
+            "       select r.ID_ROLE from ROLE r" +
+            "        where r.DESCRIPTION = #{role}" +
+            "        );")
+    List<UserEntity> getUserListByRole(String role);
 
 }
