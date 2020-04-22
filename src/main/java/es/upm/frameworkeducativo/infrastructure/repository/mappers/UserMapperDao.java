@@ -13,6 +13,10 @@ public interface UserMapperDao {
     UserEntity getUserByIdent(String ident);
 
     @Select("select ID_USER, IDENT, NAME, SURNAMES, PASSWORD, EMAIL, IS_CHANGED " +
+            "FROM USER")
+    List<UserEntity> getAllUsers();
+
+    @Select("select ID_USER, IDENT, NAME, SURNAMES, PASSWORD, EMAIL, IS_CHANGED " +
             "FROM USER WHERE EMAIL = #{email}")
     UserEntity getUserByEmail(String email);
 
@@ -35,13 +39,10 @@ public interface UserMapperDao {
     @Delete("delete from USER where ident = #{ident}")
     void deleteUserByIdent(String ident);
 
-    @Select("select u.ID_USER, u.IDENT, u.NAME, u.SURNAMES, u.PASSWORD, u.EMAIL, u.IS_CHANGED " +
-            "from USER u " +
-            "inner join USER_ROLE ur on u.ID_USER = ur.ID_USER " +
-            "   and ur.ID_ROLE = (" +
-            "       select r.ID_ROLE from ROLE r" +
-            "        where r.DESCRIPTION = #{role}" +
-            "        );")
+    @Select("select u.ID_USER, u.IDENT, u.NAME, u.SURNAMES, u.PASSWORD, u.EMAIL, u.IS_CHANGED "
+            + " from USER u"
+            + " inner join USER_ROLE ur on u.ID_USER = ur.ID_USER"
+            + " inner join ROLE r on r.ID_ROLE = ur.ID_ROLE and  r.DESCRIPTION = #{role}")
     List<UserEntity> getUserListByRole(String role);
 
 }

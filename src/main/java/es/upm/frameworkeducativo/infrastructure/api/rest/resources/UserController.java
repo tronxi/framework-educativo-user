@@ -58,6 +58,14 @@ public class UserController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
+        List<User> userList = findUserService.findListAllUsers();
+        List<UserDTO> userDTOList = userMapperInfrastructure.userListTOUserDTOList(userList);
+        return new ResponseEntity<>(userDTOList, HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDTO> getUsersById(@PathVariable String id,
                                                 @RequestHeader("authorization") String header) {

@@ -42,4 +42,9 @@ public class FindUserServiceUseCase implements FindUserService {
         return userRepository.getUserListByRole(role);
     }
 
+    @Override
+    public List<User> findListAllUsers() {
+        return userRepository.getAllUsers();
+    }
+
 }

@@ -11,6 +11,7 @@ public interface UserRepository {
     String getUserIdByEmail(String email);
     String getUserPasswordByEmail(String email);
     List<User> getUserListByRole(String role);
+    List<User> getAllUsers();
     void saveUser(User user) throws Exception;
     void updateUser(User user) throws Exception;
     void deleteUserByIdent(String ident);

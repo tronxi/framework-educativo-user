@@ -10,4 +10,6 @@ public interface FindUserService {
     User findUserByIdUser(String id_user);
     List<User> findListUserByIdUser(List<String> listId);
     List<User> findListUserByRole(String role);
+    List<User> findListAllUsers();
+
 }

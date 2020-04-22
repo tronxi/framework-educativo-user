@@ -25,7 +25,7 @@ public class UserRepositoryAdapter implements UserRepository {
     @Override
     public User getUserByIdUser(String idUser) {
         User user = userEntityToUser(userMapperDao.getUserByIdUser(idUser));
-        return  setRoles(user);
+        return setRoles(user);
     }
 
     @Override
@@ -45,14 +45,6 @@ public class UserRepositoryAdapter implements UserRepository {
         return this.getUserByEmail(email).getId_user();
     }
 
-    private User setRoles(User user) {
-        List<String> roles = userRoleRepository.getRolesByUserId(user.getId_user()).stream()
-                .map(role -> roleRepository.getDescriptionByRoleId(role.getId_role()))
-                .collect(Collectors.toList());
-        user.setRoles(roles);
-        return user;
-    }
-
     @Override
     public String getUserPasswordByEmail(String email) {
         return this.getUserByEmail(email).getPassword();
@@ -63,6 +55,17 @@ public class UserRepositoryAdapter implements UserRepository {
         List<UserEntity> userEntityList = userMapperDao.getUserListByRole(role);
         return userEntityList.stream()
                 .map(this::userEntityToUser)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        List<UserEntity> userEntityList = userMapperDao.getAllUsers();
+        return userEntityList.stream()
+                .map(userEntity -> {
+                    User user = userEntityToUser(userEntity);
+                    return setRoles(user);
+                })
                 .collect(Collectors.toList());
     }
 
@@ -120,6 +123,14 @@ public class UserRepositoryAdapter implements UserRepository {
                 .email(userEntity.getEmail())
                 .isChanged(userEntity.getIsChanged())
                 .build();
+    }
+
+    private User setRoles(User user) {
+        List<String> roles = userRoleRepository.getRolesByUserId(user.getId_user()).stream()
+                .map(role -> roleRepository.getDescriptionByRoleId(role.getId_role()))
+                .collect(Collectors.toList());
+        user.setRoles(roles);
+        return user;
     }
 
     private boolean setRoles(String id_user, String id_role) {
