@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @RequestMapping("user-service/user")
 @PreAuthorize("authenticated")
 @RequiredArgsConstructor
-public class UserController {
+public class UserResource {
 
     private final UserMapper userMapperInfrastructure;
     private final JwtService jwtService;
