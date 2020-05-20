@@ -15,6 +15,6 @@ ENV user_service user-service
 ENV profile dev
 ENV rabbit_host localhost
 ENV rabbit_pass guest
-ENV user_bd localhost
+ENV user_db localhost
 COPY --from="builder" /target/framework-educativo-0.0.1-SNAPSHOT.jar .
-CMD java -jar -Dspring.profiles.active=${profile} -Djasypt.encryptor.password=${clave} framework-educativo-0.0.1-SNAPSHOT.jar --eureka-host=${eureka_host} --user-service=${user_service} --user-bd=${user_bd} --spring.rabbitmq.host=${rabbit_host} --spring.rabbitmq.password=${rabbit_pass}
+CMD java -jar -Dspring.profiles.active=${profile} -Djasypt.encryptor.password=${clave} framework-educativo-0.0.1-SNAPSHOT.jar --eureka-host=${eureka_host} --user-service=${user_service} --user-db=${user_db} --spring.rabbitmq.host=${rabbit_host} --spring.rabbitmq.password=${rabbit_pass}
