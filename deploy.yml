@@ -68,6 +68,11 @@ spec:
                 configMapKeyRef:
                   name: framework-educativo-config-map
                   key: user_service
+            - name: user_bd
+                valueFrom:
+                  configMapKeyRef:
+                    name: framework-educativo-config-map
+                    key: user_bd
 
 ---
 apiVersion: v1
