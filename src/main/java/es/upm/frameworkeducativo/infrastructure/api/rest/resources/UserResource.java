@@ -65,7 +65,7 @@ public class UserResource {
         return new ResponseEntity<>(userDTOList, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDTO> getUsersById(@PathVariable String id,
                                                 @RequestHeader("authorization") String header) {
