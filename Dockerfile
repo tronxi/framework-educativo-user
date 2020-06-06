@@ -1,6 +1,6 @@
 FROM alpine/git as git
 WORKDIR /repo
-ADD https://api.github.com/repos/tronxi/framework-educativo-user/git/refs/heads/develop version.json
+#ADD https://api.github.com/repos/tronxi/framework-educativo-user/git/refs/heads/develop version.json
 RUN git clone https://github.com/tronxi/framework-educativo-user.git
 RUN cd framework-educativo-user && git checkout develop
 
