@@ -15,18 +15,20 @@ public class JwtService {
     public static final String BEARER = "Bearer ";
 
     private static final String USER = "user";
+    private static final String ID = "id";
     private static final String ROLES = "roles";
     private static final String ISSUER = "framework-educativo";
     private static final int EXPIRES_IN_MILLISECOND = 3600000;
     private static final String SECRET = "clave-secreta-test";
 
-    public String createToken(String user, List<String> roles) {
+    public String createToken(String user, List<String> roles, String id) {
         return JWT.create()
                 .withIssuer(ISSUER)
                 .withIssuedAt(new Date())
                 .withNotBefore(new Date())
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRES_IN_MILLISECOND))
                 .withClaim(USER, user)
+                .withClaim(ID, id)
                 .withArrayClaim(ROLES, roles.toArray(new String[0]))
                 .sign(Algorithm.HMAC256(SECRET));
     }
