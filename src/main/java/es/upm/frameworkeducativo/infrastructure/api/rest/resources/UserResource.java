@@ -74,7 +74,7 @@ public class UserResource {
         return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('TEACHER') or hasRole('ADMIN')")
     @PostMapping(value = "/subject", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<UserDTO>> getListUsersById(@RequestBody List<String> listId) {
         List<User> userList = findUserService.findListUserByIdUser(listId);
