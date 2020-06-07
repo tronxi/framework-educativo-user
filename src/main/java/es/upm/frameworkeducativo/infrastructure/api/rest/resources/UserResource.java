@@ -39,7 +39,7 @@ public class UserResource {
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('TEACHER') or hasRole('ADMIN')")
     @GetMapping(params = "ident", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDTO> getUsers(@RequestParam String ident,
                                             @RequestHeader("authorization") String header) {
@@ -49,7 +49,7 @@ public class UserResource {
         return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('TEACHER') or hasRole('ADMIN')")
     @GetMapping(params = "role", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<UserDTO>> getUsersByRole(@RequestParam String role) {
         List<User> userList = findUserService.findListUserByRole(role);
@@ -57,7 +57,7 @@ public class UserResource {
         return new ResponseEntity<>(userDTOList, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('TEACHER') or hasRole('ADMIN')")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<UserDTO>> getAllUsers() {
         List<User> userList = findUserService.findListAllUsers();
