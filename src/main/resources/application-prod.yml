@@ -17,6 +17,8 @@ server:
 user-service: user-service
 user-db: 192.168.1.7
 
+secret-token: "default-secret-token"
+
 eureka:
   instance:
     status-page-url-path: /actuator/health
