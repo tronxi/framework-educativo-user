@@ -22,7 +22,7 @@ public class JwtService {
     private static final int EXPIRES_IN_MILLISECOND = 3600000;
 
     @Value("${secret-token}")
-    private static String SECRET;
+    private String SECRET;
 
     public String createToken(String user, List<String> roles, String id) {
         return JWT.create()
