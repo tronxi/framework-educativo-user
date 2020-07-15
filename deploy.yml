@@ -69,15 +69,15 @@ spec:
                   name: framework-educativo-config-map
                   key: user_service
             - name: user_db
-                valueFrom:
-                  configMapKeyRef:
-                    name: framework-educativo-config-map
-                    key: user_db
+              valueFrom:
+                configMapKeyRef:
+                  name: framework-educativo-config-map
+                  key: user_db
             - name: secret_token
-                valueFrom:
-                  configMapKeyRef:
-                    name: framework-educativo-config-map
-                    key: secret_token
+              valueFrom:
+                configMapKeyRef:
+                  name: framework-educativo-config-map
+                  key: secret_token
 
 ---
 apiVersion: v1
