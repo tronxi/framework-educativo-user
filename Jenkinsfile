@@ -5,6 +5,13 @@ pipeline {
         DOCKER_HUB_PASSWORD = credentials('DOCKER_HUB_PASSWORD')
     }
     stages {
+        stage('Test') {
+            steps {
+                sh '''
+                    mvn test
+                '''
+            }
+        }
         stage('Build') {
             steps {
                 sh '''
