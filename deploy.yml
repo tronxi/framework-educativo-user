@@ -73,6 +73,11 @@ spec:
                   configMapKeyRef:
                     name: framework-educativo-config-map
                     key: user_db
+            - name: secret_token
+                valueFrom:
+                  configMapKeyRef:
+                    name: framework-educativo-config-map
+                    key: secret_token
 
 ---
 apiVersion: v1
