@@ -2,7 +2,7 @@ package es.upm.frameworkeducativo.infrastructure.repository;
 
 import es.upm.frameworkeducativo.domain.model.User;
 import es.upm.frameworkeducativo.domain.port.secundary.UserRepository;
-import es.upm.frameworkeducativo.infrastructure.rabbitmq.DeleteUserEvent;
+import es.upm.frameworkeducativo.infrastructure.event.publisher.DeleteUserEventPublisher;
 import es.upm.frameworkeducativo.infrastructure.repository.mappers.UserMapperDao;
 import es.upm.frameworkeducativo.infrastructure.repository.model.UserEntity;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class UserRepositoryAdapter implements UserRepository {
     private final UserMapperDao userMapperDao;
     private final IRoleRepository roleRepository;
     private final IUserRoleRepository userRoleRepository;
-    private final DeleteUserEvent deleteUserEvent;
+    private final DeleteUserEventPublisher deleteUserEventPublisher;
 
     @Override
     public User getUserByIdUser(String idUser) {
@@ -110,7 +110,7 @@ public class UserRepositoryAdapter implements UserRepository {
         String id_user = user.getId_user();
         userRoleRepository.deleteRoleByUserId(id_user);
         userMapperDao.deleteUserByIdent(ident);
-        deleteUserEvent.deleteUserEvent(user);
+        deleteUserEventPublisher.deleteUserEvent(user);
     }
 
     private User userEntityToUser(UserEntity userEntity) {

@@ -2,85 +2,130 @@ package es.upm.frameworkeducativo.domain.useCase
 
 import es.upm.frameworkeducativo.domain.model.User
 import es.upm.frameworkeducativo.domain.port.primary.FindUserService
-import es.upm.frameworkeducativo.infrastructure.repository.IRoleRepository
-import es.upm.frameworkeducativo.infrastructure.repository.IUserRoleRepository
-import es.upm.frameworkeducativo.infrastructure.repository.RoleRepository
+import es.upm.frameworkeducativo.domain.port.secundary.UserRepository
 import es.upm.frameworkeducativo.infrastructure.repository.UserRepositoryAdapter
-import es.upm.frameworkeducativo.infrastructure.repository.UserRoleRepository
-import es.upm.frameworkeducativo.infrastructure.repository.model.UserRoleEntity
-import spock.lang.Ignore
 import spock.lang.Shared
 import spock.lang.Specification
-@Ignore
+
 class FindUserServiceUseCaseTest extends Specification {
     @Shared
-    es.upm.frameworkeducativo.domain.port.secundary.UserRepository userRepository
-    @Shared
-    IRoleRepository roleRepository
-    @Shared
-    IUserRoleRepository userRoleRepository
+    UserRepository userRepository
 
     @Shared
     FindUserService findUserService
 
     def setup() {
         userRepository = Mock(UserRepositoryAdapter)
-        roleRepository = Mock(RoleRepository)
-        userRoleRepository = Mock(UserRoleRepository)
-
-        findUserService = new FindUserServiceUseCase(userRepository, roleRepository, userRoleRepository)
+        findUserService = new FindUserServiceUseCase(userRepository)
     }
 
-    def "find user by ident" () {
+    def "find user by ident"() {
         given:
         String ident = "ident"
         String idUser = "1"
-        String idRole = "1"
+        List<String> roles = Arrays.asList("ROLE_ADMIN")
 
-        List<String> roles = new ArrayList<>()
-        roles.add("ROLE_ADMIN")
+        User expected = User
+                .builder()
+                .id_user(idUser)
+                .ident(ident)
+                .roles(roles)
+                .build()
 
-        UserRoleEntity userRoleDAO = UserRoleEntity.builder()
-                                    .id_user(idUser)
-                                    .id_role(idRole)
-                                    .build()
-        List<UserRoleEntity> userRoleDAOList = new ArrayList<>()
-        userRoleDAOList.add(userRoleDAO)
-
-        User user = User
-                    .builder()
-                    .id_user(idUser)
-                    .ident(ident)
-                    .roles(roles)
-                    .build()
-
-        userRoleRepository.getRolesByUserId(idUser) >> userRoleDAOList
-        roleRepository.getDescriptionByRoleId(idRole) >> "ROLE_ADMIN"
-        userRepository.getUserByIdent(ident) >> User.builder().id_user(idUser).ident(ident).build()
+        userRepository.getUserByIdent(ident) >> expected
 
         when:
-        User res = findUserService.findUserByIdent(ident)
+        User user = findUserService.findUserByIdent(ident)
         then:
-        res == user
+        expected == user
     }
 
-    def "find user by email" () {
+    def "find user by idUser"() {
         given:
-        String email = "email"
-        User user = null
-        when:
-        User res = findUserService.findUserByEmail(email)
-        then:
-        user == res
-    }
-
-    def "find user by idUser" () {
-        given:
+        String ident = "ident"
         String idUser = "1"
-        User user = null
+        List<String> roles = Arrays.asList("ROLE_ADMIN")
+
+        User expected = User
+                .builder()
+                .id_user(idUser)
+                .ident(ident)
+                .roles(roles)
+                .build()
+
+        userRepository.getUserByIdUser(idUser) >> expected
+
         when:
-        User res = findUserService.findUserByIdUser(idUser)
+        User user = findUserService.findUserByIdUser(idUser)
         then:
-        user == res
+        expected == user
+    }
+
+    def "find list user by idUser list"() {
+        given:
+        String ident = "ident"
+        String idUser = "1"
+        List<String> roles = Arrays.asList("ROLE_ADMIN")
+
+        User expected = User
+                .builder()
+                .id_user(idUser)
+                .ident(ident)
+                .roles(roles)
+                .build()
+        List<User> expectedList = Arrays.asList(expected)
+        List<String> listId = Arrays.asList(idUser)
+
+        userRepository.getUserByIdUser(idUser) >> expected
+
+        when:
+        List<User> user = findUserService.findListUserByIdUser(listId)
+        then:
+        expectedList == user
+    }
+
+    def "find list user by role"() {
+        given:
+        String ident = "ident"
+        String idUser = "1"
+        String role = "role"
+        List<String> roles = Arrays.asList("ROLE_ADMIN")
+
+        User expected = User
+                .builder()
+                .id_user(idUser)
+                .ident(ident)
+                .roles(roles)
+                .build()
+        List<User> expectedList = Arrays.asList(expected)
+
+        userRepository.getUserListByRole(role) >> expectedList
+
+        when:
+        List<User> user = findUserService.findListUserByRole(role)
+        then:
+        expectedList == user
+    }
+
+    def "find all users"() {
+        given:
+        String ident = "ident"
+        String idUser = "1"
+        List<String> roles = Arrays.asList("ROLE_ADMIN")
+
+        User expected = User
+                .builder()
+                .id_user(idUser)
+                .ident(ident)
+                .roles(roles)
+                .build()
+        List<User> expectedList = Arrays.asList(expected)
+
+        userRepository.getAllUsers() >> expectedList
+
+        when:
+        List<User> user = findUserService.findListAllUsers()
+        then:
+        expectedList == user
     }
 }

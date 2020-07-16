@@ -1,27 +1,25 @@
 package es.upm.frameworkeducativo.domain.useCase
 
 import es.upm.frameworkeducativo.domain.model.User
-import es.upm.frameworkeducativo.domain.port.primary.LoadUserService
+import es.upm.frameworkeducativo.domain.port.primary.UpdateUserService
 import es.upm.frameworkeducativo.domain.port.secundary.UserRepository
-import es.upm.frameworkeducativo.infrastructure.repository.UserRepositoryAdapter
-import spock.lang.Ignore
 import spock.lang.Shared
 import spock.lang.Specification
 
-class LoadUserServiceUseCaseTest extends Specification {
+class UpdateUserServiceUseCaseTest extends Specification {
+
     @Shared
     UserRepository userRepository
 
     @Shared
-    LoadUserService loadUserService
+    UpdateUserService updateUserService
 
     def setup() {
-        userRepository = Mock(UserRepositoryAdapter)
-
-        loadUserService = new LoadUserServiceUseCase(userRepository)
+        userRepository = Mock(UserRepository)
+        updateUserService = new UpdateUserServiceUseCase(userRepository)
     }
 
-    def "save user list"() {
+    def "should update user"() {
         given:
         String ident = "ident"
         String idUser = "1"
@@ -33,12 +31,10 @@ class LoadUserServiceUseCaseTest extends Specification {
                 .ident(ident)
                 .roles(roles)
                 .build()
-        List<User> userList = Arrays.asList(user)
         when:
-        loadUserService.loadUsers(userList)
+        updateUserService.updateUser(user)
         then:
-        userList.size() * userRepository.saveUser(_ as User)
         noExceptionThrown()
-
+        1 * userRepository.updateUser(user)
     }
 }

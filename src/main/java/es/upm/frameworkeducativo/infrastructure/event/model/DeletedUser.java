@@ -1,4 +1,4 @@
-package es.upm.frameworkeducativo.infrastructure.rabbitmq.model;
+package es.upm.frameworkeducativo.infrastructure.event.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

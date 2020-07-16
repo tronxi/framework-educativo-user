@@ -1,16 +1,16 @@
-package es.upm.frameworkeducativo.infrastructure.rabbitmq;
+package es.upm.frameworkeducativo.infrastructure.event.publisher;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import es.upm.frameworkeducativo.domain.model.User;
-import es.upm.frameworkeducativo.infrastructure.rabbitmq.model.DeletedUser;
+import es.upm.frameworkeducativo.infrastructure.event.model.DeletedUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class DeleteUserEvent {
+public class DeleteUserEventPublisher {
 
     private final RabbitTemplate rabbitTemplate;
     private final ObjectMapper objectMapper;

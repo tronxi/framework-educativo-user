@@ -21,11 +21,6 @@ public class FindUserServiceUseCase implements FindUserService {
     }
 
     @Override
-    public User findUserByEmail(String email) {
-        return null;
-    }
-
-    @Override
     public User findUserByIdUser(String id_user) {
         return userRepository.getUserByIdUser(id_user);
     }
