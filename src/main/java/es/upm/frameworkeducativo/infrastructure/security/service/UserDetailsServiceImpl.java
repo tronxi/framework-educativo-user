@@ -41,7 +41,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     private String getUserPassword(String user) {
         return userRepositoryAdapter.getUserPasswordByEmail(user);
-        //return new BCryptPasswordEncoder().encode(userRepository.getUserPasswordByEmail(user));
     }
 
     private List<String> getRolesByUser(String user) {
